@@ -1,0 +1,203 @@
+body{
+    text-align:center;
+    background-color:gray;
+
+}
+
+.wrapper_receipt{
+    display:inline-block;  
+    border-radius:10px; 
+    width:85%;  
+    background-color:#FFF; 
+    text-align: center;
+}
+
+#logo{
+    width:100px;
+    background-color:black;
+    float: center;
+    margin-left: 20px;
+}
+
+.Heading{
+    padding-top: 50px;
+    padding-bottom : 30px;
+}
+
+.Bus_name{
+    text-align: center;
+}
+
+.cust_details{
+    text-align: left;
+    padding-left: 50px;
+}
+
+.bus_details{
+    padding-top: 50px;
+    text-align: right;
+    padding-right: 30px;
+    float: right;
+}
+
+#main_page{
+    max-width:800px;
+    width: 100%;  
+    display:inline-block;
+    background-color: white;
+}
+
+
+.movie_details{
+    text-align: center;
+    display:inline-block; 
+    width: 50%;
+    padding-left: 200px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+}
+
+.movie_details table{
+    border-collapse: collapse;
+    width: 50%;
+    text-align: center;
+}
+
+.movie_details tr#title{
+    font-size: 23px;
+}
+.movie_details tr{
+    order:#CCC 1px dotted; 
+    font-size:15px;
+}
+
+.movie_details th{ 
+    text-align:center; 
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color:#4E4E4E
+}
+
+.movie_details td{ 
+    text-align:center; 
+    
+    color:#666; 
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top:1px solid #444;
+     border-bottom:1px solid #444;
+}
+
+.movie_details tr.tr_header{
+    border-bottom:1px solid #333;
+}
+
+.seat_details{
+    display:inline-block; 
+    text-align:center; 
+    width:90%;
+    border-style: solid;
+  border-width: medium;
+  padding-bottom:10px;
+  margin-bottom: 30px;
+}
+
+.seat_details table{ 
+    border-collapse:collapse; 
+    width:100%;
+}
+
+.seat_details h2{ 
+    padding-left: 20px;
+}
+
+.seat_details tr{
+     margin-bottom:20px; 
+     border:#CCC 1px dotted; 
+     padding:
+}
+
+.seat_details th{ 
+    text-align:left; 
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color:#4E4E4E
+}
+
+.seat_details td{ 
+    text-align:left; 
+    
+    color:#666; 
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.seat_details tr.tr_header{
+    border-bottom:1px solid #333;
+}
+
+.print_out{
+    padding-top: 10px;
+}
+
+.wrapper_ticket{
+    margin-top: 30px;
+    display:inline-block;   
+    background-color:#FFF; 
+    text-align: center;
+}
+
+
+.wrapper_ticket{
+    margin:25px 10px 25px 10px;
+}
+
+#ticket_logo{
+    margin-top: 10px;
+    margin-left: 1px;
+    width:25px;
+    background-color:black;
+    text-align: center;
+}
+
+.ticket_header{
+    font-size: 13px;
+    text-align: center;
+}
+
+.ticket_standard{
+    background-color: thistle;
+    display:inline-block;
+    border: 1px solid black;
+    width: 150px;
+    height: 180px;
+    margin: 5px;
+
+}
+
+.ticket_first{
+    background-color: cadetblue;
+    border: 1px solid black;
+    display:inline-block;
+    width: 150px;
+    height: 180px;
+    margin: 5px;
+
+}
+
+
+.ticket_seat{
+    font-size: 15px;
+}
+    
+.ticket_details{
+    font-size: 15px;
+}
+.print_session{
+    margin-bottom: 30px;
+}
