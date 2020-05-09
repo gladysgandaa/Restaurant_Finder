@@ -1,0 +1,54 @@
+<head>
+
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+
+    </head>
+    <body>
+    <div id="login_div" class="main-div">
+    <h3>Firebase Web login</h3>
+    <input type="email" placeholder="Email..." id="email_field"/>
+    <input type="password" placeholder="Password..." id="password_field"/>
+    <div>
+        <button onclick="login()">Login to Account</button>
+        <br>
+        <button onclick="createAccount()">Create Account</button>
+    </div>
+</div>
+<div id="user_div"class="loggedin-div">
+    <h3>Welcome user</h3>
+    <p id="user_para">Welcome to firebase web login example. You're logged in</p>
+    <button onclick="logout()">Logout</button>
+    <br>
+    <button id="verified" onclick="sendVerification()">Send verification</button>
+</div>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBPC-rsgBO157fHqHlzA3xCm0d8htx6lEY",
+      authDomain: "cloud-restaurant-app.firebaseapp.com",
+      databaseURL: "https://cloud-restaurant-app.firebaseio.com",
+      projectId: "cloud-restaurant-app",
+      storageBucket: "cloud-restaurant-app.appspot.com",
+      messagingSenderId: "99332886018",
+      appId: "1:99332886018:web:81e3986683eccf536ea11b",
+      measurementId: "G-7BHD4BMB65"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    firebase.analytics();
+</script>
+  <script src="../js/app.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/index.js"></script>
+</body>
