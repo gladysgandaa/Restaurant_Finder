@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <div id="login_div" class="main-div">
+        <h3>Firebase Web login</h3>
+        <input type="email" placeholder="Email..." id="email_field"/>
+        <input type="password" placeholder="Password..." id="password_field"/>
+        <div>
+            <button onclick="login()">Login to Account</button>
+            <br>
+            <button onclick="createAccount()">Create Account</button>
+        </div>
+    </div>
+    <div id="user_div"class="loggedin-div">
+        <h3>Welcome user</h3>
+        <p id="user_para">Welcome to firebase web login example. You're logged in</p>
+        <button onclick="logout()">Logout</button>
+        <br>
+        <button id="verified" onclick="sendVerification()">Send verification</button>
+    </div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+    authDomain: "form-50005.firebaseapp.com",
+    databaseURL: "https://form-50005.firebaseio.com",
+    projectId: "form-50005",
+    storageBucket: "form-50005.appspot.com",
+    messagingSenderId: "790644686206",
+    appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="index.js"></script>
+
+
+
+
+</body>
+</html>
