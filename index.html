@@ -50,7 +50,7 @@
                     <input type="password" id="signup-password" required />
                     <label for="signup-password">Choose password</label>
                 </div>
-                <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+                <button class="btn yellow darken-2 z-depth-0">Sign Up</button>
             </form>
         </div>
     </div>
@@ -68,7 +68,7 @@
                     <input type="password" id="login-password" required />
                     <label for="login-password">Your password</label>
                 </div>
-                <button class="btn yellow darken-2 z-depth-0">Login</button>
+                <button class="btn yellow darken-2 z-depth-0" onclick="login()">Login</button>
             </form>
         </div>
     </div>
@@ -146,8 +146,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        //Update firestore settings
-        db.settings({timestampsInSnapshots: true});
+
     </script>
 
     <!-- Compiled and minified JavaScript -->
