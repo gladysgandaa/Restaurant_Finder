@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
     <div id="login_div" class="main-div">
         <h3>Firebase Web login</h3>
         <input type="email" placeholder="Email..." id="email_field"/>
@@ -24,12 +23,13 @@
         <button id="verified" onclick="sendVerification()">Send verification</button>
     </div>
 
+
+ <!--To connect html to database firestore-->   
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
