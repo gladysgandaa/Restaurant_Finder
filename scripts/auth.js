@@ -2,11 +2,14 @@
 auth.onAuthStateChanged(user => {
     //If user is logged in
     if (user) {
-        console.log("User logged in: ", user);
+        //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
+        db.collection('guides').get().then(snapshot => {
+            setupGuides(snapshot.docs);
+        });
     }
     //If user is not logged in
     else {
-        console.log("User not logged in ! ! FUCK ME")
+        setupGuides([]);
     }
 })
 
