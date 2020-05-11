@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -119,7 +120,36 @@
             </li>
         </ul>
     </div>
-    
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+            authDomain: "form-50005.firebaseapp.com",
+            databaseURL: "https://form-50005.firebaseio.com",
+            projectId: "form-50005",
+            storageBucket: "form-50005.appspot.com",
+            messagingSenderId: "790644686206",
+            appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        //Make auth and firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        //Update firestore settings
+        db.settings({timestampsInSnapshots: true});
+    </script>
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="scripts/auth.js"></script>
@@ -127,4 +157,5 @@
 
 
 </body>
+
 </html>
