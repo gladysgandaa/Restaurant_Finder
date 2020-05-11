@@ -1,3 +1,20 @@
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+
+const setupUI = (user) => {
+    if (user) {
+        //Toggle Logged In UI
+        loggedInLinks.forEach(item => item.style.display = 'block');
+        loggedOutLinks.forEach(item => item.style.display = 'none');
+    }
+    else {
+        //Toggle Logged Out UI
+        loggedInLinks.forEach(item => item.style.display = 'none');
+        loggedOutLinks.forEach(item => item.style.display = 'block');
+    }
+
+}
+
 //Getting guides data
 const guideList = document.querySelector('.guides');
 
@@ -25,7 +42,7 @@ const setupGuides = (data) => {
     //Because no user is logged in, no data is fetched meaning data.length = 0 
     //Print this code below
     else {
-        guideList.innerHTML = '<h5 class="center-align"> Login la boss</h5>' ;
+        guideList.innerHTML = '<h5 class="center-align"> Login la boss</h5>';
     }
 }
 

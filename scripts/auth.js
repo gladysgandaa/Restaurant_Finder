@@ -5,11 +5,13 @@ auth.onAuthStateChanged(user => {
         //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
         db.collection('guides').get().then(snapshot => {
             setupGuides(snapshot.docs);
+            setupUI(user);
         });
     }
     //If user is not logged in
     else {
         setupGuides([]);
+        setupUI();
     }
 })
 
