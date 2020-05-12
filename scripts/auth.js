@@ -5,10 +5,15 @@ auth.onAuthStateChanged(user => {
         //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
         //Change .get().then() ==> .onSnapshot
         //Meaning it will listen to every changes and update real time
-        db.collection('guides').onSnapshot(snapshot => {
-            setupGuides(snapshot.docs);
-            setupUI(user);
-        });
+        db.collection('guides')
+            .onSnapshot(snapshot => {
+                setupGuides(snapshot.docs);
+                setupUI(user);
+            }, error => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                window.alert("Error :" + errorMessage);
+            })
     }
     //If user is not logged in
     else {
@@ -32,6 +37,13 @@ signupForm.addEventListener('submit', (e) => {
     //Using auth variable in index, we call a function to sign up user
     auth.createUserWithEmailAndPassword(userEmail, userPass)
         .then(cred => {
+            //Make a bio to db for user
+            return db.collection('users').doc(cred.user.uid).set({
+                bio: signupForm['signup-bio'].value
+            });
+        })
+        // Create user db first THEN start below code
+        .then(() => {
             //Close the signup modal and reset 
             const modal = document.querySelector('#modal-signup');
             M.Modal.getInstance(modal).close();
@@ -111,3 +123,15 @@ createForm.addEventListener('submit', (e) => {
     })
 
 })
+
+
+//Verification function
+function sendVerification() {
+    window.alert("Email sent");
+    var user = auth.currentUser;
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+    }).catch(function (error) {
+        // An error happened.
+    });
+}

@@ -1,13 +1,35 @@
+//Getting guides data
+const guideList = document.querySelector('.guides');
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
+const accountDetails = document.querySelector('.account-details');
 
 const setupUI = (user) => {
     if (user) {
+        //Account info
+        //To get access to bio from DB
+        db.collection('users').doc(user.uid).get().then(doc => {
+            const html = `
+            <div>Logged in as ${user.email}</div>
+            <div>Verified : ${user.emailVerified}</div>
+            <div>Bio : ${doc.data().bio}</div>
+            `;
+            accountDetails.innerHTML = html;
+        })
+
         //Toggle Logged In UI
         loggedInLinks.forEach(item => item.style.display = 'block');
         loggedOutLinks.forEach(item => item.style.display = 'none');
+        const email_verified = user.emailVerified;
+        if (email_verified) {
+            document.getElementById("verified").style.display = "none";
+        } else {
+            document.getElementById("verified").style.display = "block";
+        }
     }
     else {
+        //Hide account info
+        accountDetails.innerHTML = '';
         //Toggle Logged Out UI
         loggedInLinks.forEach(item => item.style.display = 'none');
         loggedOutLinks.forEach(item => item.style.display = 'block');
@@ -15,8 +37,7 @@ const setupUI = (user) => {
 
 }
 
-//Getting guides data
-const guideList = document.querySelector('.guides');
+
 
 //Take data and cycle all in our index
 const setupGuides = (data) => {
