@@ -1,14 +1,33 @@
+//Add Admin cloud function
+const adminForm = document.querySelector('.admin-actions');
+adminForm.addEventListener('submit', (e) => {
+
+    //To not refresh the page
+    e.preventDefault();
+
+    const adminEmail = document.querySelector('#admin-email').value;
+    //Calling index.js functions
+    const addAdminRole = functions.httpsCallable('addAdminRole');
+    addAdminRole({ email: adminEmail }).then(result => {
+        console.log(result);
+    });
+});
+
+
 //To check if user is login or not, so it will appear a different display
 auth.onAuthStateChanged(user => {
     //If user is logged in
     if (user) {
+        user.getIdTokenResult().then(idTokenResult => {
+            user.admin = idTokenResult.claims.admin;
+            setupUI(user);
+        })
         //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
         //Change .get().then() ==> .onSnapshot
         //Meaning it will listen to every changes and update real time
         db.collection('guides')
             .onSnapshot(snapshot => {
                 setupGuides(snapshot.docs);
-                setupUI(user);
             }, error => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
