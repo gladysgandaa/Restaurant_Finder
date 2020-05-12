@@ -3,7 +3,9 @@ auth.onAuthStateChanged(user => {
     //If user is logged in
     if (user) {
         //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
-        db.collection('guides').get().then(snapshot => {
+        //Change .get().then() ==> .onSnapshot
+        //Meaning it will listen to every changes and update real time
+        db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs);
             setupUI(user);
         });
@@ -83,5 +85,29 @@ loginForm.addEventListener('submit', (e) => {
             var errorMessage = error.message;
             window.alert("Error :" + errorMessage);
         })
+
+})
+
+
+//Create new guide
+const createForm = document.querySelector('#create-form');
+createForm.addEventListener('submit', (e) => {
+
+    //To not refresh the page
+    e.preventDefault();
+
+    db.collection('guides').add({
+        Title: createForm['title'].value,
+        Content: createForm['content'].value
+    }).then(() => {
+        //Close the modal and reset form
+        const modal = document.querySelector('#modal-create');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
+    }).catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        window.alert("Error :" + errorMessage);
+    })
 
 })
