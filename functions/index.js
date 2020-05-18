@@ -35,4 +35,4 @@ exports.addAdminRole = functions.https.onCall((data, context) => {
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
 
 Steps to deploy
-firebase deploy --only functions*/
+firebase deploy --only functions */

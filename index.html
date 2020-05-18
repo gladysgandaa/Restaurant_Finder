@@ -33,9 +33,39 @@
                 <li class="logged-out" style="display: none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                 </li>
+                <li class="logged-in" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
+                </li>
             </ul>
         </div>
     </nav>
+
+    <!-- CONTACT MODAL -->
+    <div id="modal-contact" class="modal">
+        <div class="modal-content">
+            <h4>Contact</h4><br />
+            <form id="contact-form">
+                <div class="input-field">
+                    <input type="text" id="contact-name" required />
+                    <label for="contact-name">Name</label>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="contact-email" required />
+                    <label for="contact-email">Email address</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="contact-number" required />
+                    <label for="contact-number">Contact number</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="contact-context" required />
+                    <label for="contact-context">Context</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+
 
     <!-- ADMIN ACTIONS -->
     <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">

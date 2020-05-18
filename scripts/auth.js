@@ -42,6 +42,33 @@ auth.onAuthStateChanged(user => {
 })
 
 
+//Contact Form
+const contactForm = document.querySelector('#contact-form'); //NavBar ID for signup
+contactForm.addEventListener('submit', (e) => {
+
+    //To not refresh the page
+    e.preventDefault();
+
+    db.collection('contact').add({
+        Name: contactForm['contact-name'].value,
+        Email: contactForm['contact-email'].value,
+        Number: contactForm['contact-number'].value,
+        Context: contactForm['contact-context'].value
+    }).then(() => {
+        //Close the modal and reset form
+        const modal = document.querySelector('#modal-contact');
+        M.Modal.getInstance(modal).close();
+        contactForm.reset();
+    }).catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        window.alert("Error :" + errorMessage);
+    })
+
+
+})
+
+
 //SignUp Function
 const signupForm = document.querySelector('#signup-form'); //NavBar ID for signup
 signupForm.addEventListener('submit', (e) => {
