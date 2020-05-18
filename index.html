@@ -1,60 +1,30 @@
 <!doctype html>
-<!--
-  Copyright 2015 Google Inc. All rights reserved.
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-      https://www.apache.org/licenses/LICENSE-2.0
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Learn how to use the Firebase platform on the Web">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FriendlyEats</title>
-
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-  <link rel="icon" href="images/favicon.ico">
-
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="FriendlyEats">
-  <meta name="theme-color" content="#4285F4">
-
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="FriendlyEats">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#4285F4">
-
-  <!-- Tile icon for Win8 -->
-  <!-- <meta name="msapplication-TileColor" content="#3372DF">
-  <meta name="msapplication-navbutton-color" content="#303F9F"> -->
-
-  <!-- Material Design Components -->
   <link rel="stylesheet"
   href="https://unpkg.com/material-components-web@0.39.3/dist/material-components-web.min.css" type="text/css">
   <script src="https://unpkg.com/material-components-web@0.39.3/dist/material-components-web.js"></script>
-
-  <!-- App Styling -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
   <link rel="stylesheet" href="/styles/main.css" type="text/css">
+  <!-- <link rel="stylesheet" href="/styles/style.css" type="text/css"> -->
+
 </head>
 <body>
 <div>
-  <div class="header"></div>
-
+  <div class="header">
+  </div>
+  <!-- <div class="nav">
+    <ul>
+      <li><a class="active" href="#home">Home</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div> -->
   <main></main>
 
   <div class="dialogs"></div>
@@ -63,13 +33,14 @@
       <header id="site-header" class="mdc-toolbar mdc-toolbar--fixed">
         <div id="title" class="mdc-toolbar__row mdc-layout-grid">
           <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-            <span class="material-icons mdc-toolbar__icon--menu">restaurant</span>
-            <span class="mdc-toolbar__title">FriendlyEats</span>
+            <span class="mdc-toolbar__title">Cloud Restaurants</span>
+            <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
           </section>
         </div>
         <div id="section-header" data-fir-if="hasSectionHeader"></div>
       </header>
   </div>
+
 
   <div hidden class="template" id="main-adjusted">
     <div id="message-cards-container" class="mdc-layout-grid mdc-toolbar-fixed-adjust">
@@ -84,51 +55,12 @@
   </div>
 
   <div hidden class="template" id="no-restaurants">
-    <div id="guy-container" class="mdc-toolbar-fixed-adjust">
-      <img class="guy" src="/images/guy_fireats.png" />
-      <div class="text">
-        This app is connected to the Firebase project "<b data-fir-content="projectId"></b>".<br />
-        <br />
-        Your Cloud Firestore has no documents in <b>/restaurants/</b>.
-      </div>
-      <br />
-      <a class="mdc-button" id="add_mock_data">
-        Add mock data
-      </a>
-    </div>
   </div>
 
   <div hidden class="template" id="no-ratings">
-      <div id="guy-container" class="mdc-toolbar-fixed-adjust">
-        <img class="guy" src="/images/guy_fireats.png" />
-        <div class="text">
-          This restaurant has no ratings.<br />
-        </div>
-        <br />
-        <a class="mdc-button" data-fir-click="add_mock_data">
-          Add mock ratings
-        </a>
-      </div>
     </div>
 
   <div hidden class="template" id="no-results">
-    <div id="guy-container" class="mdc-toolbar-fixed-adjust">
-      <img class="guy" src="/images/guy_fireats.png" />
-      <div class="text">
-        There are no results for your those filters!
-      </div>
-    </div>
-  </div>
-
-  <div hidden class="template" id="filter-display">
-    <div id="filter" class="mdc-toolbar mdc-layout-grid">
-      <div id="show-filters" >
-        <div id="active-filters">
-          <i class="material-icons">filter_list</i>
-          You're seeing <b data-fir-content="filter_description"></b>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div hidden class="template" id="restaurant-header">
@@ -160,6 +92,48 @@
     </header>
   </div>
 
+  <div id="modal-create" class="modal">
+    <div class="modal-content">
+        <h4>Add Restaurant</h4><br />
+        <form id="create-form">
+            <div class="input-field">
+                <input type="text" id="name" required>
+                <label for="name">Restaurant Name</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="city" required>
+                <label for="city">Restaurant City</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="category" required>
+                <label for="category">Restaurant Category</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="price" required>
+                <label for="price">Restaurant Price (1-5)</label>
+            </div>
+            <div class="input-field">
+              <input type="text" id="numRating" required>
+              <label for="numRating">Number of Rating</label>
+          </div>
+          <div class="input-field">
+            <input type="text" id="avgRating" required>
+            <label for="avgRating">Average Rating</label>
+        </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+        </form>
+    </div>
+</div>
+
+  <div hidden class="template" id="filter-display">
+      <div id="show-filters" >
+        <div id="active-filters">
+          <i class="material-icons">filter_list</i>
+          Filter restaurant <b data-fir-content="filter_description"></b>
+        </div>
+      </div>
+  </div>
+
   <div hidden class="template" id="rating"></div>
   <span hidden class="template" id="price"></span>
 
@@ -176,7 +150,7 @@
   </div>
 
   <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-4" id="restaurant-card">
-    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_restaurant">
+    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="show_restaurant_details">
       <div class="mdc-card__title" data-fir-style="backgroundImage:photo"></div>
       <div class="mdc-card__supporting-text">
         <h2 data-fir-content="name">...</h2>
@@ -352,13 +326,43 @@
 <script src="/__/firebase/7.14.3/firebase-app.js"></script>
 <script src="/__/firebase/7.14.3/firebase-auth.js"></script>
 <script src="/__/firebase/7.14.3/firebase-firestore.js"></script>
+<script src="/__/firebase/7.14.3/firebase-functions.js"></script>
 <script src="/__/firebase/init.js"></script>
 
-<script src="//unpkg.com/navigo@6"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+      apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+      authDomain: "form-50005.firebaseapp.com",
+      databaseURL: "https://form-50005.firebaseio.com",
+      projectId: "form-50005",
+      storageBucket: "form-50005.appspot.com",
+      messagingSenderId: "790644686206",
+      appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
+  };
+  // Initialize Firebase
 
-<script src="/scripts/FriendlyEats.js"></script>
-<script src="/scripts/FriendlyEats.View.js"></script>
-<script src="/scripts/FriendlyEats.Mock.js"></script>
-<script src="/scripts/FriendlyEats.Data.js"></script>
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp({});
+    }
+
+  //Make auth and firestore reference
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const functions = firebase.functions();
+
+
+</script>
+
+
+
+
+<script src="//unpkg.com/navigo@6"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="/scripts/Restaurants.js"></script>
+<script src="/scripts/Restaurants.View.js"></script>
+<script src="/scripts/index.js"></script>
+<script src="/scripts/Restaurants.Data.js"></script>
 </body>
 </html>

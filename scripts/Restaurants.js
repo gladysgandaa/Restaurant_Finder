@@ -1,24 +1,15 @@
-/**
- * Copyright 2017 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 'use strict';
 
-/**
- * Initializes the FriendlyEats app.
- */
-function FriendlyEats() {
+function Restaurants() {
+  var that = this;
+  firebase.auth().signInAnonymously().then(function() {
+    that.showTemplates();
+    that.initRouter();
+    that.reviewDialog();
+    that.filterDialog();
+  }).catch(function(err) {
+    console.log(err);
+  });
   this.filters = {
     city: '',
     price: '',
@@ -27,22 +18,12 @@ function FriendlyEats() {
   };
 
   this.dialogs = {};
-
-  var that = this;
-  firebase.auth().signInAnonymously().then(function() {
-    that.initTemplates();
-    that.initRouter();
-    that.initReviewDialog();
-    that.initFilterDialog();
-  }).catch(function(err) {
-    console.log(err);
-  });
 }
 
 /**
- * Initializes the router for the FriendlyEats app.
+ * Initializes the router for the Restaurants app.
  */
-FriendlyEats.prototype.initRouter = function() {
+Restaurants.prototype.initRouter = function() {
   this.router = new Navigo();
 
   var that = this;
@@ -77,7 +58,7 @@ FriendlyEats.prototype.initRouter = function() {
     });
 };
 
-FriendlyEats.prototype.getCleanPath = function(dirtyPath) {
+Restaurants.prototype.getCleanPath = function(dirtyPath) {
   if (dirtyPath.startsWith('/index.html')) {
     return dirtyPath.split('/').slice(1).join('/');
   } else {
@@ -85,15 +66,15 @@ FriendlyEats.prototype.getCleanPath = function(dirtyPath) {
   }
 };
 
-FriendlyEats.prototype.getFirebaseConfig = function() {
+Restaurants.prototype.getFirebaseConfig = function() {
   return firebase.app().options;
 };
 
-FriendlyEats.prototype.getRandomItem = function(arr) {
+Restaurants.prototype.getRandomItem = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-FriendlyEats.prototype.data = {
+Restaurants.prototype.data = {
   words: [
     'Bar',
     'Fire',
@@ -193,5 +174,5 @@ FriendlyEats.prototype.data = {
 };
 
 window.onload = function() {
-  window.app = new FriendlyEats();
+  window.app = new Restaurants();
 };
