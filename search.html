@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Aldo's Review</title>
+</head>
+
+<body class="grey ligthen=3">
+
+    <!-- NAVBAR -->
+    <nav class="z-depth-0 grey lighten-4">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">
+                <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="logged-in" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+                </li>
+                <li class="logged-in" style="display: none;">
+                    <a href="#" class="grey-text" id="logout">Logout</a>
+                </li>
+                <li class="admin" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
+                </li>
+                <li class="logged-out" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+                </li>
+                <li class="logged-out" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+                </li>
+                <li class="logged-in" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <h1>WOI, ini search bar</h1>
+        <form id="search-form">
+            <div class="input-field">
+                <input type="Name" id="search" required />
+                <label for="search">Search </label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Search</button>
+        </form>
+    </div>
+
+    <div class="container" style="margin-top: 40px;">
+        <ul class="collapsible z-depth-0 search" style="border: none;">
+
+        </ul>
+    </div>
+
+
+
+    <!-- All connection with Firebase is initiliazed here-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+            authDomain: "form-50005.firebaseapp.com",
+            databaseURL: "https://form-50005.firebaseio.com",
+            projectId: "form-50005",
+            storageBucket: "form-50005.appspot.com",
+            messagingSenderId: "790644686206",
+            appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        //Make auth and firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const functions = firebase.functions();
+
+
+    </script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts/search.js"></script>
+    <!-- <script src="scripts/Restaurants.js"></script>
+    <script src="scripts/Restaurants.View.js"></script>
+    <script src="scripts/Restaurants.Data.js"></script> -->
+    <script src="scripts/index.js"></script>
+    <script src="scripts/db.js"></script>
+    <script src="//unpkg.com/navigo@6"></script>
+
+
+</body>
+
+</html>

@@ -40,8 +40,8 @@ const setupUI = (user) => {
         loggedInLinks.forEach(item => item.style.display = 'none');
         loggedOutLinks.forEach(item => item.style.display = 'block');
     }
-
 }
+
 
 
 
@@ -72,6 +72,8 @@ const setupGuides = (data) => {
         guideList.innerHTML = '<h5 class="center-align"> Login la boss</h5>';
     }
 }
+
+
 
 
 
