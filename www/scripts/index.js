@@ -1,5 +1,5 @@
-//Getting guides data
-const guideList = document.querySelector('.guides');
+//Getting restaurant data
+const restaurantList = document.querySelector('.restaurants');
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
@@ -46,7 +46,7 @@ const setupUI = (user) => {
 
 
 //Take data and cycle all in our index
-const setupGuides = (data) => {
+const setupRestaurants = (data) => {
 
     //Check if there is data
     //If there is data, run below code
@@ -55,21 +55,24 @@ const setupGuides = (data) => {
         //Loop every document 
         data.forEach(doc => {
             //data() to get details of the object in DB
-            const guide = doc.data();
+            const restaurant = doc.data();
             const li = `
         <li>
-            <div class="collapsible-header grey lighten-4">${guide.Title}</div>
-            <div class="collapsible-body white">${guide.Content}</div>
+            <div class="collapsible-header grey lighten-4">${restaurant.name}</div>
+            <div class="collapsible-body white">
+            ${restaurant.city}
+            ${restaurant.category}
+            ${restaurant.price}</div>
         </li>
         `;
             html += li
         });
-        guideList.innerHTML = html;
+        restaurantList.innerHTML = html;
     }
     //Because no user is logged in, no data is fetched meaning data.length = 0 
     //Print this code below
     else {
-        guideList.innerHTML = '<h5 class="center-align"> Login la boss</h5>';
+        restaurantList.innerHTML = '<h5 class="center-align"> Login la boss</h5>';
     }
 }
 

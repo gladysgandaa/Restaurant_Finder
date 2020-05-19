@@ -25,9 +25,9 @@ auth.onAuthStateChanged(user => {
         //Get data ##NB: This is moved from db.js to only retrieved data when user is logged in
         //Change .get().then() ==> .onSnapshot
         //Meaning it will listen to every changes and update real time
-        db.collection('guides')
+        db.collection('restaurants')
             .onSnapshot(snapshot => {
-                setupGuides(snapshot.docs);
+                setupRestaurants(snapshot.docs);
             }, error => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -36,7 +36,7 @@ auth.onAuthStateChanged(user => {
     }
     //If user is not logged in
     else {
-        setupGuides([]);
+        setupRestaurants([]);
         setupUI();
     }
 })
@@ -147,16 +147,18 @@ loginForm.addEventListener('submit', (e) => {
 })
 
 
-//Create new guide
+//Create new restaurant
 const createForm = document.querySelector('#create-form');
 createForm.addEventListener('submit', (e) => {
 
     //To not refresh the page
     e.preventDefault();
 
-    db.collection('guides').add({
-        Title: createForm['title'].value,
-        Content: createForm['content'].value
+    db.collection('restaurants').add({
+        name: createForm['name'].value,
+        city: createForm['city'].value,
+        category: createForm['category'].value,
+        price: createForm['price'].value
     }).then(() => {
         //Close the modal and reset form
         const modal = document.querySelector('#modal-create');
@@ -167,7 +169,6 @@ createForm.addEventListener('submit', (e) => {
         var errorMessage = error.message;
         window.alert("Error :" + errorMessage);
     })
-
 })
 
 
