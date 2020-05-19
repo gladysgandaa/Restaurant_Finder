@@ -39,14 +39,6 @@ Restaurants.prototype.viewList = function(filters, filter_description) {
   });
 
   var renderer = {
-    // remove: function(doc) {
-    //   var locationCardToDelete = mainEl.querySelector('#doc-' + doc.id);
-    //   if (locationCardToDelete) {
-    //     mainEl.querySelector('#cards').removeChild(locationCardToDelete.parentNode);
-    //   }
-
-    //   return;
-    // },
     display: function(doc) {
       var data = doc.data();
       data['.id'] = doc.id;
@@ -70,28 +62,6 @@ Restaurants.prototype.viewList = function(filters, filter_description) {
         mainEl.querySelector('#cards').append(el);
       }
     },
-    // empty: function() {
-    //   var headerEl = that.renderBaseTemplate('header-base', {
-    //     hasSectionHeader: true
-    //   });
-
-    //   var noResultsEl = that.renderBaseTemplate('no-results');
-
-    //   that.changeData(
-    //     headerEl.querySelector('#section-header'),
-    //     that.renderBaseTemplate('filter-display', {
-    //       filter_description: filter_description
-    //     })
-    //   );
-
-    //   headerEl.querySelector('#show-filters').addEventListener('click', function() {
-    //     that.dialogs.filter.show();
-    //   });
-
-    //   that.changeData(document.querySelector('.header'), headerEl);
-    //   that.changeData(document.querySelector('main'), noResultsEl);
-    //   return;
-    // }
   };
 
   if (filters.city || filters.category || filters.price || filters.sort !== 'Rating' ) {
@@ -118,24 +88,6 @@ Restaurants.prototype.viewSetup = function() {
 
   var config = this.getFirebaseConfig();
   var noRestaurantsEl = this.renderBaseTemplate('no-restaurants', config);
-
-  // var button = noRestaurantsEl.querySelector('#add_mock_data');
-  // var addingMockData = false;
-
-  // var that = this;
-  // button.addEventListener('click', function(event) {
-  //   // if (addingMockData) {
-  //   //   return;
-  //   // }
-  //   // addingMockData = true;
-
-  //   // event.target.style.opacity = '0.4';
-  //   // event.target.innerText = 'Please wait...';
-
-  //   // that.addMockRestaurants().then(function() {
-  //   //   that.rerender();
-  //   // });
-  // });
 
   this.changeData(document.querySelector('.header'), headerEl);
   this.changeData(document.querySelector('main'), noRestaurantsEl);

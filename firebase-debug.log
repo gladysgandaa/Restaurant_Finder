@@ -1,26 +1,22 @@
-[debug] [2020-05-18T17:16:25.145Z] ----------------------------------------------------------------------
-[debug] [2020-05-18T17:16:25.147Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only hosting
-[debug] [2020-05-18T17:16:25.148Z] CLI Version:   8.2.0
-[debug] [2020-05-18T17:16:25.148Z] Platform:      win32
-[debug] [2020-05-18T17:16:25.148Z] Node Version:  v12.14.1
-[debug] [2020-05-18T17:16:25.150Z] Time:          Tue May 19 2020 03:16:25 GMT+1000 (Australian Eastern Standard Time)
-[debug] [2020-05-18T17:16:25.150Z] ----------------------------------------------------------------------
-[debug] [2020-05-18T17:16:25.150Z] 
-[debug] [2020-05-18T17:16:25.158Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2020-05-18T17:16:25.158Z] > authorizing via signed-in user
-[debug] [2020-05-18T17:16:25.158Z] [iam] checking project form-50005 for permissions ["firebase.projects.get"]
-[debug] [2020-05-18T17:16:25.161Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2020-05-18T17:16:25.161Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2020-05-18T17:16:26.117Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 18 May 2020 17:16:26 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-05-18T17:16:26.290Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/form-50005:testIamPermissions  
+[debug] [2020-05-19T04:09:26.372Z] ----------------------------------------------------------------------
+[debug] [2020-05-19T04:09:26.374Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only hosting
+[debug] [2020-05-19T04:09:26.374Z] CLI Version:   8.2.0
+[debug] [2020-05-19T04:09:26.374Z] Platform:      win32
+[debug] [2020-05-19T04:09:26.374Z] Node Version:  v12.14.1
+[debug] [2020-05-19T04:09:26.375Z] Time:          Tue May 19 2020 14:09:26 GMT+1000 (Australian Eastern Standard Time)
+[debug] [2020-05-19T04:09:26.375Z] ----------------------------------------------------------------------
+[debug] [2020-05-19T04:09:26.375Z] 
+[debug] [2020-05-19T04:09:26.383Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-05-19T04:09:26.384Z] > authorizing via signed-in user
+[debug] [2020-05-19T04:09:26.384Z] [iam] checking project form-50005 for permissions ["firebase.projects.get"]
+[debug] [2020-05-19T04:09:26.387Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/form-50005:testIamPermissions  
  {"permissions":["firebase.projects.get"]}
-[debug] [2020-05-18T17:16:27.664Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 18 May 2020 17:16:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1000","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-05-18T17:16:27.665Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/form-50005  
+[debug] [2020-05-19T04:09:27.820Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 19 May 2020 04:09:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1159","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-19T04:09:27.821Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/form-50005  
  
-[debug] [2020-05-18T17:16:28.267Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 18 May 2020 17:16:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
-[debug] [2020-05-18T17:16:28.268Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/form-50005/webApps/-/config  
+[debug] [2020-05-19T04:09:28.333Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 19 May 2020 04:09:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-19T04:09:28.335Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/form-50005/webApps/-/config  
  
-[debug] [2020-05-18T17:16:29.516Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 18 May 2020 17:16:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-19T04:09:29.352Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 19 May 2020 04:09:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
 [info] i  hosting: Serving hosting files from: ./
 [info] +  hosting: Local server: http://localhost:5000
