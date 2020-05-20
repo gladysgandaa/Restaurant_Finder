@@ -158,7 +158,10 @@ createForm.addEventListener('submit', (e) => {
         name: createForm['name'].value,
         city: createForm['city'].value,
         category: createForm['category'].value,
-        price: createForm['price'].value
+        price: createForm['price'].value,
+        description: createForm['description'].value,
+        image:createForm['image'].value,
+        address:createForm['address'].value,
     }).then(() => {
         //Close the modal and reset form
         const modal = document.querySelector('#modal-create');
@@ -182,3 +185,6 @@ function sendVerification() {
         // An error happened.
     });
 }
+
+
+// Data Filtering 

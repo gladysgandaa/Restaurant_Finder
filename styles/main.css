@@ -1,0 +1,69 @@
+a, label{
+  font-size: 1.5rem !important;
+}
+
+.modal{
+  bottom: unset !important;
+}
+
+#map {
+  margin-top: 50px;
+  height: 250px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 17em;
+  height: 34rem;
+  padding: 1rem;
+}
+
+.card-body{
+  margin-top: 3px;
+}
+
+.card-title{
+  margin-top: 3px;
+  cursor: pointer;
+  color: cornflowerblue !important;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-img-top{
+  height: 225px;
+  width: 218px;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.modal {
+  overflow: auto !important;
+}
+
+
+/* Restaurant Details */
+
+.restaurant-photo img{
+  margin: 20px;
+  height: 640px !important;
+  width: 500px !important;
+}
+
+#name{
+  font-weight: bold;
+}
+
+.restaurant-details{
+  font-size: 16px;
+}
+
+.restaurant-details #city{
+  color: 	#696969!important;
+}

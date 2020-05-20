@@ -1,0 +1,261 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link rel="stylesheet" href="styles/main.css" type="text/css">
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+      <title>Aldo's Review</title>
+   </head>
+   <body class="grey ligthen=3">
+      <!-- NAVBAR -->
+      <nav class="z-depth-0 grey lighten-4">
+         <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">
+            <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+               <li class="logged-in" style="display: none;">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+               </li>
+               <li class="logged-in" style="display: none;">
+                  <a href="#" class="grey-text" id="logout">Logout</a>
+               </li>
+               <li class="admin" style="display: none;">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
+               </li>
+               <li class="logged-out" style="display: none;">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+               </li>
+               <li class="logged-out" style="display: none;">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+               </li>
+               <li class="logged-in" style="display: none;">
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <!-- CONTACT MODAL -->
+      <div id="modal-contact" class="modal">
+         <div class="modal-content">
+            <h4>Contact</h4>
+            <br />
+            <form id="contact-form">
+               <div class="input-field">
+                  <input type="text" id="contact-name" required />
+                  <label for="contact-name">Name</label>
+               </div>
+               <div class="input-field">
+                  <input type="email" id="contact-email" required />
+                  <label for="contact-email">Email address</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="contact-number" required />
+                  <label for="contact-number">Contact number</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="contact-context" required />
+                  <label for="contact-context">Context</label>
+               </div>
+               <button class="btn yellow darken-2 z-depth-0">SUBMIT</button>
+            </form>
+         </div>
+      </div>
+      <!-- ADMIN ACTIONS -->
+      <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
+         <input type="email" placeholder="User email" id="admin-email" required />
+         <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
+      </form>
+      <!-- SIGN UP MODAL -->
+      <div id="modal-signup" class="modal">
+         <div class="modal-content">
+            <h4>Sign up</h4>
+            <br />
+            <form id="signup-form">
+               <div class="input-field">
+                  <input type="email" id="signup-email" required />
+                  <label for="signup-email">Email address</label>
+               </div>
+               <div class="input-field">
+                  <input type="password" id="signup-password" required />
+                  <label for="signup-password">Choose password</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="signup-bio" required />
+                  <label for="signup-bio">One line bio</label>
+               </div>
+               <button class="btn yellow darken-2 z-depth-0">Sign Up</button>
+            </form>
+         </div>
+      </div>
+      <!-- LOGIN MODAL -->
+      <div id="modal-login" class="modal">
+         <div class="modal-content">
+            <h4>Login</h4>
+            <br />
+            <form id="login-form">
+               <div class="input-field">
+                  <input type="email" id="login-email" required />
+                  <label for="login-email">Email address</label>
+               </div>
+               <div class="input-field">
+                  <input type="password" id="login-password" required />
+                  <label for="login-password">Your password</label>
+               </div>
+               <button class="btn yellow darken-2 z-depth-0">Login</button>
+            </form>
+         </div>
+      </div>
+      <!-- ACCOUNT MODAL -->
+      <div id="modal-account" class="modal">
+         <div class="modal-content center-align">
+            <h4>Account details</h4>
+            <br />
+            <div class="account-details"></div>
+            <button class="btn yellow darken-2 z-depth-0 center-align" id="verified" onclick="sendVerification()">Send
+            verification</button>
+         </div>
+      </div>
+      <!-- CREATE GUIDE MODAL -->
+      <div id="modal-create" class="modal">
+         <div class="modal-content">
+            <h4>Add Restaurant</h4>
+            <br />
+            <form id="create-form">
+               <div class="input-field">
+                  <input type="text" id="name" required>
+                  <label for="name">Restaurant Name</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="city" required>
+                  <label for="city">Restaurant City</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="category" required>
+                  <label for="category">Restaurant Category</label>
+               </div>
+               <div class="input-field">
+                <input type="text" id="description" required>
+                <label for="category">Restaurant Description</label>
+                </div>
+                <div class="input-field">
+                <input type="text" id="address" required>
+                <label for="category">Restaurant Address</label>
+                </div>
+               <div class="input-field">
+                  <input type="text" id="price" required>
+                  <label for="price">Restaurant Price (1-5)</label>
+               </div>
+               <!-- <div class="upload-image">
+                  <label>Select image: </label>
+                  <input type="file" id="image" accept="image/*">
+                  <button type="button" onclick="upload()">Upload Image</button>
+               </div> -->
+               <div class="file-field input-field">
+                   <div class="btn">
+                   <span>File</span>
+                   <input type="file" onchange="previewFile()">
+                   </div>
+                   <div class="file-path-wrapper">
+                   <input class="file-path validate" type="text">
+                   </div>
+               </div>
+               <p id="url"><b>Firebase Storage URL: </b></p>
+               <div class="col s12">
+                   <img class="responsive-img" src="https://firebasestorage.googleapis.com/v0/b/img-storage-d41a0.appspot.com/o/images%2Ffirebase-storage.jpg?alt=media&token=394aeb7e-c10b-4b02-b7b2-144795ebf4a8"
+                  id="preview" alt="Preview Image">
+               </div>
+               <input type="hidden" name="image" id="image" value="url">
+               <button class="btn yellow darken-2 z-depth-0">Create</button>
+            </form>
+         </div>
+      </div>
+      <div class="container" style="margin-top: 40px;">
+         <div class="row z-depth-0 restaurants" style="border: none;">
+         </div>
+      </div>
+
+      <!-- All connection with Firebase is initiliazed here-->
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script>
+         // Your web app's Firebase configuration
+         var firebaseConfig = {
+             apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+             authDomain: "form-50005.firebaseapp.com",
+             databaseURL: "https://form-50005.firebaseio.com",
+             projectId: "form-50005",
+             storageBucket: "form-50005.appspot.com",
+             messagingSenderId: "790644686206",
+             appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
+         };
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+
+         //Make auth and firestore reference
+         const auth = firebase.auth();
+         const db = firebase.firestore();
+         const functions = firebase.functions();
+
+         
+         
+      </script>
+
+    <script>
+        var storageRef = firebase.storage().ref();
+        var imagesRef = storageRef.child('images');
+        function previewFile(){
+        var file =document.querySelector('input[type=file]').files[0];
+        var metadata = {
+        contentType: 'image/jpeg'
+        };
+        var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        function(snapshot) {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state)
+            {
+            case firebase.storage.TaskState.PAUSED:
+            console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING:
+            console.log('Upload is running');
+            break;
+            }
+        },
+        function(error) {
+            console.log('Upload Error')
+        },
+        function() {
+            var starsRef = storageRef.child('images/'+ file.name);
+            starsRef.getDownloadURL().then(function(url) {
+            document.querySelector('#preview').src=url;
+            document.getElementById("image").value = url;
+            var t=document.querySelector('p')
+            t.innerHTML ='<b>Firebase Storage URL: </b>'+url
+            }).catch(function(error) {
+            console.log('Error Download File');
+            });
+        });
+        }
+    </script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="scripts/auth.js"></script>
+      <script src="scripts/index.js"></script>
+      <script src="scripts/db.js"></script>
+   </body>
+</html>

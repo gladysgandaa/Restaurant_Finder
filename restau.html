@@ -1,0 +1,89 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link rel="stylesheet" href="styles/main.css" type="text/css">
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+      <title>Aldo's Review</title>
+   </head>
+   <body class="grey ligthen=3">
+    <!-- NAVBAR -->
+    <nav class="z-depth-0 grey lighten-4">
+       <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">
+          <img onclick="window.location.href ='/index.html'" src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+          </a>
+       </div>
+    </nav>
+        <div class="restaurant-details container">
+            <div class="row">
+                <div id="image" class="col-md-6 restaurant-photo">
+                </div>
+                <div class="col-md-6 restaurant-info">
+                    <h2 id="name"></h2>
+                    <p><span id="price"></span></p> 
+                    <p><span id="address"></span></p>
+                    <p><span id="category"></span></p>
+                    <p><span id="city"></span></p>
+                    <br>
+                    <h3>About This Place</h3>
+                    <p><span id="description"></span></p>
+                    <div id="map"></div>
+                    <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPC-rsgBO157fHqHlzA3xCm0d8htx6lEY&callback=initMap">
+                    </script>
+                </div>
+            </div>
+        </div>
+    
+    <!-- <h1>Restaurant Info</h1>
+<div>
+    <p >Name: <span id="name"></span></p>
+    <p>City: <span id="city"></span></p>
+    <p>Category: <span id="category"></span></p>
+    <p>Price: <span id="price"></span></p>
+    <p>Address: <span id="address"></span></p>
+    <p>Image: <span id="image"></span></p>
+
+    <button onclick="window.location.href ='/index.html'">Home</button>
+</div> -->
+
+<script>
+    //getting the value of the database stored in session 
+    let restau = JSON.parse(sessionStorage.getItem("value"));
+    console.log(restau)
+    
+    //assigning and displaying those values
+    let name = document.querySelector('#name')
+    name.innerHTML = restau.name
+    let city = document.querySelector('#city')
+    city.innerHTML = restau.city
+    let address = document.querySelector('#address')
+    address.innerHTML = restau.address
+    let cat = document.querySelector('#category')
+    cat.innerHTML = restau.category
+    let price = document.querySelector('#price')
+    price.innerHTML = restau.price
+    let description = document.querySelector('#description')
+    description.innerHTML = restau.description
+    let image = document.querySelector('#image')
+    image.innerHTML = '<img src="' + restau.image + '" />'; 
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="scripts/auth.js"></script>
+
+      <script src="scripts/index.js"></script>
+      <script src="scripts/db.js"></script>
+   </body>
+</html>
