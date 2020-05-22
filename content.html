@@ -1,0 +1,154 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Aldo's Review</title>
+</head>
+
+<body class="grey ligthen=3">
+    <!-- NAVBAR -->
+    <nav class="z-depth-0 grey lighten-4">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">
+                <img onclick="window.location.href ='/index.html'" src="img/logo.svg"
+                    style="width: 180px; margin-top: 10px;">
+            </a>
+        </div>
+    </nav>
+
+
+    <div class="restaurant-details container">
+        <div class="row">
+            <div id="image" class="col-md-6 restaurant-photo">
+            </div>
+            <div class="col-md-6 restaurant-info">
+                <h2 id="name"></h2>
+                <p><span id="price"></span></p>
+                <p><span id="address"></span></p>
+                <p><span id="category"></span></p>
+                <p><span id="city"></span></p>
+                <br>
+                <h3>Blog</h3>
+
+
+                <iframe src=""></iframe>
+                <h3>Video Title</h3>
+                <p class="description">Video Description
+                <p>
+                    <a class="back-button" onclick="window.location.href ='/blog.html'">Back to blog page</a>
+                    <!-- <div id="map"></div>
+                    <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPC-rsgBO157fHqHlzA3xCm0d8htx6lEY&callback=initMap">
+                    </script> -->
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <div class="restaurant-review" style="text-align: center;">
+        <h3>Write a Review</h3>
+        <br>
+        <div class="review-text"><textarea id="review" rows="6" cols="20" placeholder="Enter Review"
+                style="width: 50%; height: 20%; background-color: aliceblue;"></textarea>
+        </div>
+        <br>
+        <div class="review-submit"><input type="button" value="Add Review" id="submitReview"
+                style="display: block;margin: auto;" />
+        </div><br><br>
+        <ul>
+            <li>
+                <div id="restauReview" style="margin-bottom: 50px;">
+                    
+                </div>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+    <script>
+        // //Make auth and firestore reference
+
+        // let blogPost;
+        // const id = sessionStorage.getItem("id");
+        // const userID = sessionStorage.getItem("userID");
+        // console.log(id);
+
+
+        // // //getting the value of the database stored in session 
+        // let post = JSON.parse(sessionStorage.getItem("value"));
+        // console.log(post)
+
+
+        // // //assigning and displaying those values
+        // let name = document.querySelector('#name')
+        // name.innerHTML = post.postName
+        // let content = document.querySelector('#city')
+        // content.innerHTML = post.postContent
+        // let date = document.querySelector('#address')
+        // date.innerHTML = post.createdAt
+        // let author = document.querySelector('#category')
+        // author.innerHTML = post.author
+        // let youtube = post.youtube
+
+
+
+
+
+        // function getVideo() {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: 'https://www.googleapis.com/youtube/v3/search',
+        //         data: {
+        //             key: 'AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4',
+        //             q: post.youtube,
+        //             part: 'snippet',
+        //             maxResults: 1,
+        //             type: 'video',
+        //             videoEmbeddable: true,
+        //         },
+        //         success: function (data) {
+        //             embedVideo(data)
+        //         },
+        //         error: function (response) {
+        //             console.log("Request Failed");
+        //         }
+        //     });
+        // }
+
+        // function embedVideo(data) {
+        //     $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+        //     $('h3').text(data.items[0].snippet.title)
+        //     $('.description').text(data.items[0].snippet.description)
+        // }
+
+        // getVideo();
+
+
+
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- <script src="scripts/blog.js"></script>
+    <script src="scripts/content.js"></script> -->
+    <script src="scripts/test.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
