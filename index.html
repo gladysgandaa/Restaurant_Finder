@@ -6,10 +6,9 @@
       <!-- Compiled and minified CSS -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
       <link rel="stylesheet" href="styles/main.css" type="text/css">
-      
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
       <title>Aldo's Review</title>
    </head>
    <body class="grey ligthen=3">
@@ -141,13 +140,13 @@
                   <label for="category">Restaurant Category</label>
                </div>
                <div class="input-field">
-                <input type="text" id="description" required>
-                <label for="category">Restaurant Description</label>
-                </div>
-                <div class="input-field">
-                <input type="text" id="address" required>
-                <label for="category">Restaurant Address</label>
-                </div>
+                  <input type="text" id="description" required>
+                  <label for="category">Restaurant Description</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="address" required>
+                  <label for="category">Restaurant Address</label>
+               </div>
                <div class="input-field">
                   <input type="text" id="price" required>
                   <label for="price">Restaurant Price (1-5)</label>
@@ -156,31 +155,32 @@
                   <label>Select image: </label>
                   <input type="file" id="image" accept="image/*">
                   <button type="button" onclick="upload()">Upload Image</button>
-               </div> -->
+                  </div> -->
                <div class="file-field input-field">
-                   <div class="btn">
-                   <span>File</span>
-                   <input type="file" onchange="previewFile()">
-                   </div>
-                   <div class="file-path-wrapper">
-                   <input class="file-path validate" type="text">
-                   </div>
+                  <div class="btn">
+                     <span>File</span>
+                     <input type="file" onchange="previewFile()">
+                  </div>
+                  <div class="file-path-wrapper">
+                     <input class="file-path validate" type="text">
+                  </div>
                </div>
                <p id="url"><b>Firebase Storage URL: </b></p>
                <div class="col s12">
-                   <img class="responsive-img" src="https://firebasestorage.googleapis.com/v0/b/img-storage-d41a0.appspot.com/o/images%2Ffirebase-storage.jpg?alt=media&token=394aeb7e-c10b-4b02-b7b2-144795ebf4a8"
-                  id="preview" alt="Preview Image">
+                  <img class="responsive-img" src="https://firebasestorage.googleapis.com/v0/b/img-storage-d41a0.appspot.com/o/images%2Ffirebase-storage.jpg?alt=media&token=394aeb7e-c10b-4b02-b7b2-144795ebf4a8"
+                     id="preview" alt="Preview Image">
                </div>
                <input type="hidden" name="image" id="image" value="url">
                <button class="btn yellow darken-2 z-depth-0">Create</button>
             </form>
          </div>
       </div>
+
       <div class="container" style="margin-top: 40px;">
+         <input id="search" type="text" placeholder="Search...">
          <div class="row z-depth-0 restaurants" style="border: none;">
          </div>
       </div>
-
       <!-- All connection with Firebase is initiliazed here-->
       <!-- The core Firebase JS SDK is always required and must be listed first -->
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
@@ -188,74 +188,220 @@
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-messaging.js"></script>
+      <script src="https://apis.google.com/js/api.js"></script>
       <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
       <script>
          // Your web app's Firebase configuration
          var firebaseConfig = {
-             apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
-             authDomain: "form-50005.firebaseapp.com",
-             databaseURL: "https://form-50005.firebaseio.com",
-             projectId: "form-50005",
-             storageBucket: "form-50005.appspot.com",
-             messagingSenderId: "790644686206",
-             appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f"
-         };
+            apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+            authDomain: "form-50005.firebaseapp.com",
+            databaseURL: "https://form-50005.firebaseio.com",
+            projectId: "form-50005",
+            storageBucket: "form-50005.appspot.com",
+            messagingSenderId: "790644686206",
+            appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
+            measurementId: "G-CR41MFE7Q1"
+         }
          // Initialize Firebase
          firebase.initializeApp(firebaseConfig);
-
+         firebase.analytics();
          //Make auth and firestore reference
          const auth = firebase.auth();
          const db = firebase.firestore();
          const functions = firebase.functions();
-
+         const messaging = firebase.messaging();
+         
+         messaging.usePublicVapidKey("BMAlSdK-sCOMUhv0hibLmEGE1CrXfqQSWPiZiSoGn2zjkUdqBgK3gq3ZQ_6PczMPMHSRGeUGc9YBWXkPkaLafmg");
+         const tokenDivId = 'token_div';
+         const permissionDivId = 'permission_div';
+         
+         // [START refresh_token]
+         // Callback fired if Instance ID token is updated.
+         messaging.onTokenRefresh(function() {
+         messaging.getToken().then(function(refreshedToken) {
+         console.log('Token refreshed.');
+         // Indicate that the new Instance ID token has not yet been sent to the
+         // app server.
+         setTokenSentToServer(false);
+         // Send Instance ID token to app server.
+         sendTokenToServer(refreshedToken);
+         // [START_EXCLUDE]
+         // Display new Instance ID token and clear UI of all previous messages.
+         resetUI();
+         // [END_EXCLUDE]
+         }).catch(function(err) {
+         console.log('Unable to retrieve refreshed token ', err);
+         // showToken('Unable to retrieve refreshed token ', err);
+         });
+         });
+         // [END refresh_token]
+         
+         // [START receive_message]
+         // Handle incoming messages. Called when:
+         // - a message is received while the app has focus
+         // - the user clicks on an app notification created by a service worker
+         //   `messaging.setBackgroundMessageHandler` handler.
+         messaging.onMessage(function(payload) {
+         console.log('Message received. ', payload);
+         var obj = JSON.parse(payload.data.notification);
+         var notification = new Notification(obj.title, {
+         icon: obj.icon,
+         body: obj.body
+         });
+         
+         return self.registration.showNotification(notificationTitle, notificationOptions);
+         // [START_EXCLUDE]
+         // Update the UI to include the received message.
+         appendMessage(payload);
+         // [END_EXCLUDE]
+         });
+         // [END receive_message]
+         
+         function resetUI() {
+         // clearMessages();
+         // showToken('loading...');
+         // [START get_token]
+         // Get Instance ID token. Initially this makes a network call, once retrieved
+         // subsequent calls to getToken will return from cache.
+         messaging.getToken().then(function(currentToken) {
+         if (currentToken) {
+         sendTokenToServer(currentToken);
+         updateUIForPushEnabled(currentToken);
+         } else {
+         // Show permission request.
+         console.log('No Instance ID token available. Request permission to generate one.');
+         // Show permission UI.
+         updateUIForPushPermissionRequired();
+         setTokenSentToServer(false);
+         }
+         }).catch(function(err) {
+         console.log('An error occurred while retrieving token. ', err);
+         // showToken('Error retrieving Instance ID token. ', err);
+         setTokenSentToServer(false);
+         });
+         // [END get_token]
+         }
          
          
+         // function showToken(currentToken) {
+         // // Show token in console and UI.
+         // var tokenElement = document.querySelector('#token');
+         // tokenElement.textContent = currentToken;
+         // }
+         
+         // Send the Instance ID token your application server, so that it can:
+         // - send messages back to this app
+         // - subscribe/unsubscribe the token from topics
+         function sendTokenToServer(currentToken) {
+         if (!isTokenSentToServer()) {
+         console.log('Sending token to server...');
+         // TODO(developer): Send the current token to your server.
+         setTokenSentToServer(true);
+         } else {
+         console.log('Token already sent to server so won\'t send it again ' +
+          'unless it changes');
+         }
+         
+         }
+         
+         function isTokenSentToServer() {
+         return window.localStorage.getItem('sentToServer') === '1';
+         }
+         
+         function setTokenSentToServer(sent) {
+         window.localStorage.setItem('sentToServer', sent ? '1' : '0');
+         }
+         
+         function showHideDiv(divId, show) {
+         const div = document.querySelector('#' + divId);
+         if (show) {
+         div.style = 'display: visible';
+         } else {
+         div.style = 'display: none';
+         }
+         }
+         
+         function requestPermission() {
+         console.log('Requesting permission...');
+         // [START request_permission]
+         messaging.requestPermission().then(function() {
+         console.log('Notification permission granted.');
+         // TODO(developer): Retrieve an Instance ID token for use with FCM.
+         // [START_EXCLUDE]
+         // In many cases once an app has been granted notification permission, it
+         // should update its UI reflecting this.
+         resetUI();
+         // [END_EXCLUDE]
+         }).catch(function(err) {
+         console.log('Unable to get permission to notify.', err);
+         });
+         // [END request_permission]
+         }
+         
+         function deleteToken() {
+         // Delete Instance ID token.
+         // [START delete_token]
+         messaging.getToken().then(function(currentToken) {
+         messaging.deleteToken(currentToken).then(function() {
+         console.log('Token deleted.');
+         setTokenSentToServer(false);
+         // [START_EXCLUDE]
+         // Once token is deleted update UI.
+         resetUI();
+         // [END_EXCLUDE]
+         }).catch(function(err) {
+         console.log('Unable to delete token. ', err);
+         });
+         // [END delete_token]
+         }).catch(function(err) {
+         console.log('Error retrieving Instance ID token. ', err);
+         // showToken('Error retrieving Instance ID token. ', err);
+         });
+         
+         }
+         
+         // Add a message to the messages element.
+         function appendMessage(payload) {
+         const messagesElement = document.querySelector('#messages');
+         const dataHeaderELement = document.createElement('h5');
+         const dataElement = document.createElement('pre');
+         dataElement.style = 'overflow-x:hidden;';
+         dataHeaderELement.textContent = 'Received message:';
+         dataElement.textContent = JSON.stringify(payload, null, 2);
+         messagesElement.appendChild(dataHeaderELement);
+         messagesElement.appendChild(dataElement);
+         }
+         
+         // Clear the messages element of all children.
+         // function clearMessages() {
+         // const messagesElement = document.querySelector('#messages');
+         // while (messagesElement.hasChildNodes()) {
+         // messagesElement.removeChild(messagesElement.lastChild);
+         // }
+         // }
+         
+         function updateUIForPushEnabled(currentToken) {
+         showHideDiv(tokenDivId, true);
+         showHideDiv(permissionDivId, false);
+         // showToken(currentToken);
+         }
+         
+         function updateUIForPushPermissionRequired() {
+         showHideDiv(tokenDivId, false);
+         showHideDiv(permissionDivId, true);
+         }
+         
+         resetUI();
       </script>
-
-    <script>
-        var storageRef = firebase.storage().ref();
-        var imagesRef = storageRef.child('images');
-        function previewFile(){
-        var file =document.querySelector('input[type=file]').files[0];
-        var metadata = {
-        contentType: 'image/jpeg'
-        };
-        var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
-        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        function(snapshot) {
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state)
-            {
-            case firebase.storage.TaskState.PAUSED:
-            console.log('Upload is paused');
-            break;
-            case firebase.storage.TaskState.RUNNING:
-            console.log('Upload is running');
-            break;
-            }
-        },
-        function(error) {
-            console.log('Upload Error')
-        },
-        function() {
-            var starsRef = storageRef.child('images/'+ file.name);
-            starsRef.getDownloadURL().then(function(url) {
-            document.querySelector('#preview').src=url;
-            document.getElementById("image").value = url;
-            var t=document.querySelector('p')
-            t.innerHTML ='<b>Firebase Storage URL: </b>'+url
-            }).catch(function(error) {
-            console.log('Error Download File');
-            });
-        });
-        }
-    </script>
       <!-- Compiled and minified JavaScript -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <script src="scripts/auth.js"></script>
       <script src="scripts/index.js"></script>
-      <script src="scripts/db.js"></script>
+      <script src="scripts/cloud-message.js"></script>
+      <script src="scripts/storage.js"></script>
+      <script src="scripts/restaurant-rating.js"></script>
    </body>
 </html>
