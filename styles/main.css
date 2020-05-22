@@ -50,6 +50,20 @@ a, label{
 
 /* Restaurant Details */
 
+.list{
+  background-color: white !important;
+}
+
+dl{
+  padding: 25px;
+  font-size: 16px;
+}
+
+dd{
+  padding: 2px 0;
+  font-size: 14px;
+}
+
 .restaurant-photo img{
   margin: 20px;
   height: 640px !important;
@@ -75,4 +89,43 @@ a, label{
 .back-button{
   margin: 20px;
   color: cornsilk;
+}
+
+/* Restaurant Review */
+.restaurant-review{
+  /* float: left; */
+  text-align: left;
+
+  width: 100% !important;
+}
+
+.restaurant-review h3{
+  padding-left: 50px;
+  text-align: left;
+  /* float: left;  */
+}
+
+.restaurant-review .review-text{
+  text-align: left;
+  padding-left: 50px;
+}
+
+/* .restaurant-review input{
+  text-align: left;
+} */
+
+.restaurant-review .review-submit{
+  padding-left: 50px;
+  float: left;
+}
+
+
+.restaurant-review #restauReview{
+  padding: 20px 50px !important;
+  margin-left: 50px;
+  margin-right: 50px !important;
+  float: left;
+  text-align: left;
+  background-color: white;
+  width: 90%;
 }

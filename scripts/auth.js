@@ -1,3 +1,5 @@
+// import { threadId } from "worker_threads";
+
 //Add Admin cloud function
 const adminForm = document.querySelector(".admin-actions");
 adminForm.addEventListener("submit", (e) => {
@@ -154,7 +156,7 @@ createForm.addEventListener("submit", (e) => {
       description: createForm["description"].value,
       image: createForm["image"].value,
       address: createForm["address"].value,
-      reviews: {user: "", note: ""} 
+      reviews: { user: "", note: "" },
     })
     .then(() => {
       //Close the modal and reset form
@@ -182,8 +184,5 @@ function sendVerification() {
       // An error happened.
     });
 }
-
-// Data Filtering
-
 
 

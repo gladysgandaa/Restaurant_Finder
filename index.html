@@ -177,8 +177,27 @@
       </div>
 
       <div class="container" style="margin-top: 40px;">
-         <input id="search" type="text" placeholder="Search...">
-         <div class="row z-depth-0 restaurants" style="border: none;">
+         <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3 filter-section">
+               <dl>
+                  <dt>Category</dt>
+                  <dd><a id="showAll">All</a></dd>
+                  <dd><a id="japanesefood">Japanese</a></dd>
+                  <dd><a id="koreanfood">Korean</a></dd>
+                  <dd><a id="chinesefood">Chinese</a></dd>
+                  <dd><a id="brunch">Brunch</a></dd>
+                  <dt>Price</dt>
+                  <dd><a id="onedollar">$</a></dd>
+                  <dd><a id="twodollar">$$</a></dd>
+                  <dd><a id="threedollar">$$$</a></dd>
+                  <dd><a id="fourdollar">$$$$</a></dd>
+                  <dd><a id="fivedollar">$$$$$</a></dd>
+                </dl>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9 list-restaurant">
+               <div class="row z-depth-0 restaurants" style="border: none;">
+            </div>
+         </div>
          </div>
       </div>
       <!-- All connection with Firebase is initiliazed here-->
@@ -402,6 +421,5 @@
       <script src="scripts/index.js"></script>
       <script src="scripts/cloud-message.js"></script>
       <script src="scripts/storage.js"></script>
-      <script src="scripts/restaurant-rating.js"></script>
    </body>
 </html>
