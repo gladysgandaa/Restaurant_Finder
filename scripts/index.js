@@ -194,16 +194,6 @@ function getDownloadURL(url) {
 
 
 // Data Filtering
-const showAll = document.querySelector("#showAll");
-const japaneseFood = document.querySelector("#japanesefood");
-const koreanfood = document.querySelector("#koreanfood");
-const chinesefood = document.querySelector("#chinesefood");
-const brunch = document.querySelector("#brunch");
-const onedollar = document.querySelector("#onedollar");
-const twodollar = document.querySelector("#twodollar");
-const threedollar = document.querySelector("#threedollar");
-const fourdollar = document.querySelector("#fourdollar");
-const fivedollar = document.querySelector("#fivedollar");
 var query = db.collection("restaurants")
 
 function renderFilter(){
@@ -242,38 +232,99 @@ function renderFilter(){
   });
 }
 
-// japaneseFood.onclick = function(){
-//   query = query.where("category", "==", "Japanese")
-//   renderFilter();
-// }
 
+$(".filter").click( function(){
+   
+   const search = $(this).text()
+   
+   if(search == 'Chinese' || search =='Japanese' || search =='Brunch' || search == 'Korean'){
+    console.log(search)
+   db.collection("restaurants").where("category", "==", search)
+    .get()
+    .then(function(querySnapshot) {
+      let html = "";
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            const restaurant = doc.data();
+            const li = `
+            <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="card">
+            <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
+            <div class="card-body">
+                <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
+                <p class="card-text">${restaurant.address}</p>
+            </div>
+            </div>
+            </div>
+            `;
 
-// brunch.onclick = function(){
-//   query = query.where("category", "==", "Brunch")
-//   renderFilter();
-// }
+          html += li;
+        });  
+        restaurantList.innerHTML = html;
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+  }
+  else if(search == 'All'){
+    console.log(search)
 
-// function onComplete(){
-//   window.top.location.reload();
-// }
-// japaneseFood.addEventListener("click",setTimeout(function(event){
+    db.collection("restaurants")
+    .get()
+    .then(snap => {
+      let html = ''
+    snap.forEach(doc => {
+        console.log(doc.data());
+        console.log(doc.id);
 
-// },
-// 3000))
+        const restaurant = doc.data();
+             const li = `
+             <div class="col-sm-4 col-md-4 col-lg-4">
+             <div class="card">
+             <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
+             <div class="card-body">
+                 <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
+                 <p class="card-text">${restaurant.address}</p>
+             </div>
+             </div>
+             </div>
+             `;
+ 
+           html += li;
+    }); restaurantList.innerHTML = html;
+    });
+  }
 
-showAll.addEventListener("click", function(e){
-  window.onload();
-})
+  else if(search == '$' || '$$' || '$$$' || '$$$$'){
+    console.log(search)
+    db.collection("restaurants").where("price", "==", search)
+     .get()
+     .then(function(querySnapshot) {
+       let html = ''
+         querySnapshot.forEach(function(doc) {
+             // doc.data() is never undefined for query doc snapshots
+             console.log(doc.id, " => ", doc.data());
 
-japaneseFood.addEventListener("click", function(e){
-  e.preventDefault();
-  query = query.where("category", "==", "Japanese")
-  renderFilter();
-})
-
-brunch.addEventListener("click", function(e){
-  e.preventDefault();
-  query = query.where("category", "==", "Brunch")
-  renderFilter();
+             const restaurant = doc.data();
+             const li = `
+             <div class="col-sm-4 col-md-4 col-lg-4">
+             <div class="card">
+             <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
+             <div class="card-body">
+                 <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
+                 <p class="card-text">${restaurant.address}</p>
+             </div>
+             </div>
+             </div>
+             `;
+ 
+           html += li;
+         }); restaurantList.innerHTML = html;
+     })
+     .catch(function(error) {
+         console.log("Error getting documents: ", error);
+     });
+  }
 })
 

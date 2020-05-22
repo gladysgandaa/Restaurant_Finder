@@ -140,6 +140,29 @@ reviewForm.addEventListener("click", function (e) {
 
 //$("#submitReview").click(() => location.reload())
 
+function haversine_distance(Marker1, Marker2) {
+  var R = 6371.071; // Radius of the Earth in miles
+  var rlat1 = Marker1.position.lat() * (Math.PI / 180); // Convert degrees to radians
+  var rlat2 = Marker2.position.lat() * (Math.PI / 180); // Convert degrees to radians
+  var difflat = rlat2 - rlat1; // Radian difference (latitudes)
+  var difflon =
+    (Marker2.position.lng() - Marker1.position.lng()) * (Math.PI / 180); // Radian difference (longitudes)
+
+  var d =
+    2 *
+    R *
+    Math.asin(
+      Math.sqrt(
+        Math.sin(difflat / 2) * Math.sin(difflat / 2) +
+          Math.cos(rlat1) *
+            Math.cos(rlat2) *
+            Math.sin(difflon / 2) *
+            Math.sin(difflon / 2)
+      )
+    );
+  return d;
+}
+
 function initMap() {
   var restaurants = [{}];
 
@@ -180,20 +203,20 @@ function initMap() {
       });
 
       // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({
+      var Marker1 = new google.maps.Marker({
         position: victoria,
         map: map,
       });
-      marker.setMap(map);
-      marker.addListener("click", function () {
-        infowindow.open(map, marker);
+      Marker1.setMap(map);
+      Marker1.addListener("click", function () {
+        infowindow.open(map, Marker1);
       });
 
       const initialPosition = {
-        lat: 59.325,
-        lng: 18.069,
+        lat: -37.81427,
+        lng: 144.947554,
       };
-      const marker2 = new google.maps.Marker({
+      const Marker2 = new google.maps.Marker({
         map,
         position: initialPosition,
         icon: {
@@ -209,7 +232,11 @@ function initMap() {
             );
 
             // Set marker's position.
-            marker2.setPosition({
+            var userLatLng = new google.maps.LatLng(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+            Marker2.setPosition({
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             });
@@ -227,22 +254,40 @@ function initMap() {
         alert("Geolocation is not supported by your browser.");
       }
 
-      // directionsDisplay.setMap(map);
+      var distance = haversine_distance(Marker1, Marker2);
+      document.getElementById("msg").innerHTML =
+        distance.toFixed(2) + " km away";
+
+      let directionsService = new google.maps.DirectionsService();
+      let directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map); // Existing map object displays directions
+      // Create route from existing points used for markers
+      const route = {
+        origin: initialPosition,
+        destination: victoria,
+        travelMode: "DRIVING",
+      };
+
+      directionsService.route(route, function (response, status) {
+        // anonymous function to capture directions
+        if (status !== "OK") {
+          window.alert("Directions request failed due to " + status);
+          return;
+        } else {
+          directionsRenderer.setDirections(response); // Add route to the map
+          var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+          if (!directionsData) {
+            window.alert("Directions request failed");
+            return;
+          } else {
+            document.getElementById("msg").innerHTML +=
+              "<br>Driving distance is " +
+              directionsData.distance.text +
+              " (" +
+              directionsData.duration.text +
+              ").";
+          }
+        }
+      });
     });
-
-  // function calculateRoute(){
-  //     var request = {
-  //         origin: initialPosition,
-  //         destination: victoria,
-  //         travelMode: 'DRIVING'
-  //     };
-
-  //     directionsService.route(request, function(result, status){
-  //         console.log(result, status)
-  //     });
-  // }
-
-  // document.getElementById('get').onclick = function(){
-  //     calculateRoute;
-  // };
 }
