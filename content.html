@@ -52,7 +52,28 @@
                 <hr><div id="content"></div>
             <hr>
     
-            <div class="card blog-comment my-4">
+            <br><br>
+            <div class="restaurant-review" style="text-align: center;">
+               <h3>Comment here</h3>
+               <br>
+               <div class="review-text"><textarea
+                  id="review"
+                  rows="6"
+                  cols="20"
+                  placeholder="Comment Here"
+                  style="width: 50%; height: 20%; background-color: aliceblue;"
+                  ></textarea>
+                </div>
+               <br>
+               <div class="review-submit"><input type="button" value="Add Comment" id="submitReview"  style="display: block;margin: auto;"/>
+               </div><br><br>
+               <ul>
+                 <li><div id="restauReview" style="margin-bottom: 50px;"></div></li>
+               </ul>
+               </div>
+            </div>
+
+            <!-- <div class="card blog-comment my-4">
               <h5 class="card-header">Leave a Comment:</h5>
               <div class="card-body">
                 <form>
@@ -70,10 +91,10 @@
                         
                     </div>
                 </li>
-            </ul>
+            </ul> -->
     
             <!-- Single Comment -->
-            <div class="media mb-4">
+            <!-- <div class="media mb-4">
               <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
               <div class="media-body">
                 <h5 class="mt-0">Commenter Name</h5>
@@ -85,7 +106,7 @@
               </div>
             </div>
     
-          </div>
+          </div> -->
 
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>

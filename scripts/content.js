@@ -152,14 +152,13 @@ createForm.addEventListener('submit', (e) => {
     //To not refresh the page
     e.preventDefault();
 
-    db.collection('restaurants').add({
-        name: createForm['name'].value,
-        city: createForm['city'].value,
-        category: createForm['category'].value,
-        price: createForm['price'].value,
-        description: createForm['description'].value,
-        image:createForm['image'].value,
-        address:createForm['address'].value,
+    db.collection('posts').add({
+        author: createForm['author'].value,
+        postName: createForm['postTitle'].value,
+        postPreview: createForm['postPreview'].value,
+        postContent: createForm['postContent'].value,
+        postDate: createForm['postDate'].value,
+        youtube:createForm['youtube'].value,
     }).then(() => {
         //Close the modal and reset form
         const modal = document.querySelector('#modal-create');

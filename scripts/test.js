@@ -45,10 +45,12 @@ db.collection("posts")
             let youtube = post.youtube
             let reviewList = document.querySelector("#restaurantReview");
 
-            var unique = Array.from(new Set(post.reviews));
+            var unique = Array.from(new Set(post.comment));
 
             let val;
-            
+            var results = [];
+            var users = [];
+
             function getVideo() {
                 $.ajax({
                     type: 'GET',
@@ -78,20 +80,44 @@ db.collection("posts")
 
             getVideo();
 
-        //     post.reviews.forEach(function (rev) {
+            post.comment.forEach(function (rev) {
+                console.log(rev.note);
+                console.log(rev.user);
+                results.push(rev.note);
+                users.push(rev.user);
+            })
+            console.log(results)
+            for (var i = 0; i < results.length; i++) {
+                restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
+            }
+        } else {
+            console.log("No such document")
+        }
+    }
+    )
 
-        //         console.log(rev.note);
-        //         val =
-        //             "<p>" +
-        //             rev.note +
-        //             "</p><p><b>Reviewed By: </b>" +
-        //             rev.user +
-        //             "</p><hr>";
-        //     })
+const reviewForm = document.querySelector("#submitReview");
+const review = document.querySelector("#review");
+`import firebase from "firebase/firebase";`;
 
-        //     $("#restauReview").append(val);
-        // } else {
-        //     // doc.data() will be undefined in this case
-        //     console.log("No such document!");
-        // }
-        }})
+reviewForm.addEventListener("click", function (e) {
+    const msg = review.value;
+    console.log(msg);
+    if (msg == "") {
+        alert("Enter a review");
+        return;
+    }
+    db.collection("posts")
+        .doc(id)
+        .update({
+            comment: firebase.firestore.FieldValue.arrayUnion({
+                user: userID,
+                note: msg,
+            }),
+        });
+    review.value = "";
+    function clearBox(elementID) {
+        document.getElementById(elementID).innerHTML = "";
+    }
+    clearBox("restauReview")
+});
