@@ -146,6 +146,7 @@ loginForm.addEventListener('submit', (e) => {
 })
 
 
+
 const createForm = document.querySelector('#create-form');
 createForm.addEventListener('submit', (e) => {
 
@@ -157,7 +158,7 @@ createForm.addEventListener('submit', (e) => {
         postName: createForm['postTitle'].value,
         postPreview: createForm['postPreview'].value,
         postContent: createForm['postContent'].value,
-        postDate: createForm['postDate'].value,
+        createdAt: createForm['createdAt'].value,
         youtube:createForm['youtube'].value,
     }).then(() => {
         //Close the modal and reset form

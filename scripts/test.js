@@ -92,6 +92,7 @@ db.collection("posts")
             }
         } else {
             console.log("No such document")
+            // window.location.href = 'blog.html';
         }
     }
     )
@@ -121,3 +122,22 @@ reviewForm.addEventListener("click", function (e) {
     }
     clearBox("restauReview")
 });
+
+//Delete button
+const deleteButton = document.getElementById("delete");
+deleteButton.addEventListener("click", function (e) {
+    e.preventDefault() ;
+    function deletePost() {
+        var ask = window.confirm("Are you sure you want to delete this post?");
+        if (ask) {
+            db.collection('posts').doc(id).delete();
+            window.alert("This post was successfully deleted. ");
+            console.log(id)
+        }
+    }
+    deletePost();
+    setTimeout(function(){
+        window.location.href = "/blog.html"
+    },2000)
+
+})
