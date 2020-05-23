@@ -45,10 +45,6 @@
                 <p class="description">Video Description
                 <p>
                     <a class="back-button" onclick="window.location.href ='/blog.html'">Back to blog page</a>
-                    <!-- <div id="map"></div>
-                    <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPC-rsgBO157fHqHlzA3xCm0d8htx6lEY&callback=initMap">
-                    </script> -->
             </div>
         </div>
     </div>
@@ -73,69 +69,6 @@
         </ul>
     </div>
     </div>
-
-    <script>
-        // //Make auth and firestore reference
-
-        // let blogPost;
-        // const id = sessionStorage.getItem("id");
-        // const userID = sessionStorage.getItem("userID");
-        // console.log(id);
-
-
-        // // //getting the value of the database stored in session 
-        // let post = JSON.parse(sessionStorage.getItem("value"));
-        // console.log(post)
-
-
-        // // //assigning and displaying those values
-        // let name = document.querySelector('#name')
-        // name.innerHTML = post.postName
-        // let content = document.querySelector('#city')
-        // content.innerHTML = post.postContent
-        // let date = document.querySelector('#address')
-        // date.innerHTML = post.createdAt
-        // let author = document.querySelector('#category')
-        // author.innerHTML = post.author
-        // let youtube = post.youtube
-
-
-
-
-
-        // function getVideo() {
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: 'https://www.googleapis.com/youtube/v3/search',
-        //         data: {
-        //             key: 'AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4',
-        //             q: post.youtube,
-        //             part: 'snippet',
-        //             maxResults: 1,
-        //             type: 'video',
-        //             videoEmbeddable: true,
-        //         },
-        //         success: function (data) {
-        //             embedVideo(data)
-        //         },
-        //         error: function (response) {
-        //             console.log("Request Failed");
-        //         }
-        //     });
-        // }
-
-        // function embedVideo(data) {
-        //     $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
-        //     $('h3').text(data.items[0].snippet.title)
-        //     $('.description').text(data.items[0].snippet.description)
-        // }
-
-        // getVideo();
-
-
-
-
-    </script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
