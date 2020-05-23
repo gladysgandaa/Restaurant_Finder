@@ -55,6 +55,7 @@ contactForm.addEventListener("submit", (e) => {
       Email: contactForm["contact-email"].value,
       Number: contactForm["contact-number"].value,
       Context: contactForm["contact-context"].value,
+      ABN: contactForm["contact-ABN"].value,
     })
     .then(() => {
       //Close the modal and reset form

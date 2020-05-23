@@ -1,12 +1,12 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
-  authDomain: "form-50005.firebaseapp.com",
-  databaseURL: "https://form-50005.firebaseio.com",
-  projectId: "form-50005",
-  storageBucket: "form-50005.appspot.com",
-  messagingSenderId: "790644686206",
-  appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
-  measurementId: "G-CR41MFE7Q1",
+    apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+    authDomain: "form-50005.firebaseapp.com",
+    databaseURL: "https://form-50005.firebaseio.com",
+    projectId: "form-50005",
+    storageBucket: "form-50005.appspot.com",
+    messagingSenderId: "790644686206",
+    appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
+    measurementId: "G-CR41MFE7Q1",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -36,11 +36,11 @@ db.collection("posts")
             // //assigning and displaying those values
             let name = document.querySelector('#name')
             name.innerHTML = post.postName
-            let content = document.querySelector('#city')
+            let content = document.querySelector('#content')
             content.innerHTML = post.postContent
-            let date = document.querySelector('#address')
+            let date = document.querySelector('#time')
             date.innerHTML = post.createdAt
-            let author = document.querySelector('#category')
+            let author = document.querySelector('#author')
             author.innerHTML = post.author
             let youtube = post.youtube
             let reviewList = document.querySelector("#restaurantReview");
@@ -78,21 +78,20 @@ db.collection("posts")
 
             getVideo();
 
-            post.reviews.forEach(function (rev) {
+        //     post.reviews.forEach(function (rev) {
 
-                console.log(rev.note);
-                val =
-                    "<p>" +
-                    rev.note +
-                    "</p><p><b>Reviewed By: </b>" +
-                    rev.user +
-                    "</p><hr>";
-            })
+        //         console.log(rev.note);
+        //         val =
+        //             "<p>" +
+        //             rev.note +
+        //             "</p><p><b>Reviewed By: </b>" +
+        //             rev.user +
+        //             "</p><hr>";
+        //     })
 
-            $("#restauReview").append(val);
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    })
-
+        //     $("#restauReview").append(val);
+        // } else {
+        //     // doc.data() will be undefined in this case
+        //     console.log("No such document!");
+        // }
+        }})

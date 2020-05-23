@@ -9,27 +9,30 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-      <title>Aldo's Review</title>
+      <title>Munchies</title>
    </head>
    <body class="grey ligthen=3">
       <!-- NAVBAR -->
       <nav class="z-depth-0 grey lighten-4">
          <div class="nav-wrapper container">
             <a href="#" class="brand-logo">
-            <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+            <img src="img/logo.png" style="width: 180px; margin-top: 10px;">
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+               <li class="whats-on" style="display: none;">
+                  <a href="blog.html" class="grey-text" >What's on</a>
+               </li>
                <li class="logged-in" style="display: none;">
                   <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
                </li>
-               <li class="whats-on" style="display: none;">
-                  <a href="blog.html" >What's on</a>
-               </li>
                <li class="logged-in" style="display: none;">
-                  <a href="#" class="grey-text" id="logout">Logout</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
                </li>
                <li class="admin" style="display: none;">
                   <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
+               </li>
+                              <li class="logged-in" style="display: none;">
+                  <a href="#" class="grey-text" id="logout">Logout</a>
                </li>
                <li class="logged-out" style="display: none;">
                   <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
@@ -37,9 +40,7 @@
                <li class="logged-out" style="display: none;">
                   <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                </li>
-               <li class="logged-in" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
-               </li>
+
             </ul>
          </div>
       </nav>
@@ -64,6 +65,10 @@
                <div class="input-field">
                   <input type="text" id="contact-context" required />
                   <label for="contact-context">Context</label>
+               </div>
+               <div class="input-field">
+                  <input type="text" id="contact-ABN" required />
+                  <label for="contact-ABN">ABN Number (if applicable)</label>
                </div>
                <button class="btn yellow darken-2 z-depth-0">SUBMIT</button>
             </form>
@@ -187,7 +192,7 @@
                   <dd><a class="filter">All</a></dd>
                   <dd><a class="filter">Japanese</a></dd>
                   <dd><a class="filter">Fusion</a></dd>
-                  <dd><a class="filter">Chinese</a></dd>
+                  <dd><a class="filter">Fast Food</a></dd>
                   <dd><a class="filter">Brunch</a></dd>
                   <dt>Price</dt>
                   <dd><a class="filter">$</a></dd>
@@ -255,24 +260,14 @@
          // Indicate that the new Instance ID token has not yet been sent to the
          // app server.
          setTokenSentToServer(false);
-         // Send Instance ID token to app server.
          sendTokenToServer(refreshedToken);
-         // [START_EXCLUDE]
-         // Display new Instance ID token and clear UI of all previous messages.
          resetUI();
          // [END_EXCLUDE]
          }).catch(function(err) {
          console.log('Unable to retrieve refreshed token ', err);
-         // showToken('Unable to retrieve refreshed token ', err);
          });
          });
-         // [END refresh_token]
-         
-         // [START receive_message]
-         // Handle incoming messages. Called when:
-         // - a message is received while the app has focus
-         // - the user clicks on an app notification created by a service worker
-         //   `messaging.setBackgroundMessageHandler` handler.
+
          messaging.onMessage(function(payload) {
          console.log('Message received. ', payload);
          var obj = JSON.parse(payload.data.notification);
@@ -282,19 +277,12 @@
          });
          
          return self.registration.showNotification(notificationTitle, notificationOptions);
-         // [START_EXCLUDE]
-         // Update the UI to include the received message.
          appendMessage(payload);
          // [END_EXCLUDE]
          });
          // [END receive_message]
          
          function resetUI() {
-         // clearMessages();
-         // showToken('loading...');
-         // [START get_token]
-         // Get Instance ID token. Initially this makes a network call, once retrieved
-         // subsequent calls to getToken will return from cache.
          messaging.getToken().then(function(currentToken) {
          if (currentToken) {
          sendTokenToServer(currentToken);
@@ -315,15 +303,6 @@
          }
          
          
-         // function showToken(currentToken) {
-         // // Show token in console and UI.
-         // var tokenElement = document.querySelector('#token');
-         // tokenElement.textContent = currentToken;
-         // }
-         
-         // Send the Instance ID token your application server, so that it can:
-         // - send messages back to this app
-         // - subscribe/unsubscribe the token from topics
          function sendTokenToServer(currentToken) {
          if (!isTokenSentToServer()) {
          console.log('Sending token to server...');
@@ -358,10 +337,6 @@
          // [START request_permission]
          messaging.requestPermission().then(function() {
          console.log('Notification permission granted.');
-         // TODO(developer): Retrieve an Instance ID token for use with FCM.
-         // [START_EXCLUDE]
-         // In many cases once an app has been granted notification permission, it
-         // should update its UI reflecting this.
          resetUI();
          // [END_EXCLUDE]
          }).catch(function(err) {
@@ -371,8 +346,6 @@
          }
          
          function deleteToken() {
-         // Delete Instance ID token.
-         // [START delete_token]
          messaging.getToken().then(function(currentToken) {
          messaging.deleteToken(currentToken).then(function() {
          console.log('Token deleted.');
@@ -404,13 +377,6 @@
          messagesElement.appendChild(dataElement);
          }
          
-         // Clear the messages element of all children.
-         // function clearMessages() {
-         // const messagesElement = document.querySelector('#messages');
-         // while (messagesElement.hasChildNodes()) {
-         // messagesElement.removeChild(messagesElement.lastChild);
-         // }
-         // }
          
          function updateUIForPushEnabled(currentToken) {
          showHideDiv(tokenDivId, true);
@@ -438,7 +404,7 @@
 <div class="container">
    <script async src="https://cse.google.com/cse.js?cx=017464211499015665322:v6tb5mdrrdq"></script>
    <div class="searchbar-text">Can't find what you are looking for?</div>
-   <div class="gcse-searchbox-only" enableAutoComplete="true" data-resultsUrl="https://googlecustomsearch.appspot.com/elementv2/two-page_results_elements_v2.html?query=test"></div>
+   <div class="gcse-search" enableAutoComplete="true"></div>
    <div class="copyright">&copy; Copyright 2020 S3679389(Gladys Ganda) - s3692192(Aldo Irvine)</div>
 
 </div>

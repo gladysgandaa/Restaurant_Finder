@@ -17,7 +17,7 @@
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
-      <title>Aldo's Review</title>
+      <title>Munchies</title>
    </head>
 
    <body class="grey ligthen=3">
@@ -27,7 +27,7 @@
             <a href="#" class="brand-logo">
             <img
                onclick="window.location.href ='/index.html'"
-               src="img/logo.svg"
+               src="img/logo.png"
                style="width: 180px; margin-top: 10px;"
                />
             </a>
@@ -35,6 +35,8 @@
       </nav>
       <div class="restaurant-details container">
          <div class="row">
+            <br>
+            <div class="back"><a class="back-button" onclick="window.location.href ='/index.html'">Back to home page</a></div>
             <div id="image" class="col-md-6 restaurant-photo"></div>
             <div class="col-md-6 restaurant-info">
                <h2 id="name"></h2>
@@ -56,9 +58,7 @@
                   ></script>
             </div>
          </div>
-         <a class="back-button" onclick="window.location.href ='/index.html'"
-            >Back to home page</a
-            >
+
       </div>
       <br><br>
       <div class="restaurant-review" style="text-align: center;">
@@ -82,4 +82,5 @@
       </div>
       <script src="scripts/restaurant.js"></script>
    </body>
+   
 </html>

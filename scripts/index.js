@@ -236,7 +236,7 @@ $(".filter").click(function () {
   const search = $(this).text();
 
   if (
-    search == "Chinese" ||
+    search == "Fast Food" ||
     search == "Japanese" ||
     search == "Brunch" ||
     search == "Fusion"

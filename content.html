@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Aldo's Review</title>
+    <title>Munchies</title>
 </head>
 
 <body class="grey ligthen=3">
@@ -19,56 +19,74 @@
     <nav class="z-depth-0 grey lighten-4">
         <div class="nav-wrapper container">
             <a href="#" class="brand-logo">
-                <img onclick="window.location.href ='/index.html'" src="img/logo.svg"
+                <img onclick="window.location.href ='/index.html'" src="img/logo.png"
                     style="width: 180px; margin-top: 10px;">
             </a>
         </div>
     </nav>
 
+    <div class="container">
 
-    <div class="restaurant-details container">
         <div class="row">
-            <div id="image" class="col-md-6 restaurant-photo">
+    
+
+          <!-- Post Content Column -->
+          <div class="col-lg-8">
+            <br>
+            <a href="blog.html" class="back-button">Back</a>
+            <br>
+            <!-- Title -->
+            <h1 class="mt-4" id="name"></h1>
+    
+            <!-- Author -->
+            <div class="blog-author">
+              by  
+              <p id="author"></p>
             </div>
-            <div class="col-md-6 restaurant-info">
-                <h2 id="name"></h2>
-                <p><span id="price"></span></p>
-                <p><span id="address"></span></p>
-                <p><span id="category"></span></p>
-                <p><span id="city"></span></p>
-                <br>
-                <h3>Blog</h3>
+            <div class="createdTime">Created on <p id="time"></p> </div>
+            
+            <hr>
 
-
-                <iframe src=""></iframe>
-                <h3>Video Title</h3>
-                <p class="description">Video Description
-                <p>
-                    <a class="back-button" onclick="window.location.href ='/blog.html'">Back to blog page</a>
+            <iframe src=""></iframe>
+            <h3></h3><p>
+                <hr><div id="content"></div>
+            <hr>
+    
+            <div class="card blog-comment my-4">
+              <h5 class="card-header">Leave a Comment:</h5>
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <textarea id="review" class="form-control" rows="3"></textarea>
+                  </div>
+                  <button id="submitReview" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
             </div>
-        </div>
-    </div>
 
-    <br><br>
-    <div class="restaurant-review" style="text-align: center;">
-        <h3>Write a Review</h3>
-        <br>
-        <div class="review-text"><textarea id="review" rows="6" cols="20" placeholder="Enter Review"
-                style="width: 50%; height: 20%; background-color: aliceblue;"></textarea>
-        </div>
-        <br>
-        <div class="review-submit"><input type="button" value="Add Review" id="submitReview"
-                style="display: block;margin: auto;" />
-        </div><br><br>
-        <ul>
-            <li>
-                <div id="restauReview" style="margin-bottom: 50px;">
-                    
-                </div>
-            </li>
-        </ul>
-    </div>
-    </div>
+            <ul>
+                <li>
+                    <div id="restauReview" style="margin-bottom: 50px;">
+                        
+                    </div>
+                </li>
+            </ul>
+    
+            <!-- Single Comment -->
+            <div class="media mb-4">
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+              </div>
+            </div>
+    
+    
+              </div>
+            </div>
+    
+          </div>
+
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
