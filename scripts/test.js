@@ -1,12 +1,12 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
-    authDomain: "form-50005.firebaseapp.com",
-    databaseURL: "https://form-50005.firebaseio.com",
-    projectId: "form-50005",
-    storageBucket: "form-50005.appspot.com",
-    messagingSenderId: "790644686206",
-    appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
-    measurementId: "G-CR41MFE7Q1",
+  apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+  authDomain: "form-50005.firebaseapp.com",
+  databaseURL: "https://form-50005.firebaseio.com",
+  projectId: "form-50005",
+  storageBucket: "form-50005.appspot.com",
+  messagingSenderId: "790644686206",
+  appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
+  measurementId: "G-CR41MFE7Q1",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -21,151 +21,74 @@ const userID = sessionStorage.getItem("userEmail");
 console.log(id);
 console.log(userID);
 
-
-// // getting the value of the database stored in session 
-// let post = JSON.parse(sessionStorage.getItem("value"));
-// console.log(post)
-
-
-
 db.collection("posts")
-    .doc(id)
-    .onSnapshot((snap) => {
-        if (snap.exists) {
-            post = snap.data();
-            console.log("Document data:", post);
+  .doc(id)
+  .onSnapshot((snap) => {
+    if (snap.exists) {
+      post = snap.data();
+      console.log("Document data:", post);
 
+      // //assigning and displaying those values
+      let name = document.querySelector("#name");
+      name.innerHTML = post.postName;
+      let content = document.querySelector("#city");
+      content.innerHTML = post.postContent;
+      let date = document.querySelector("#address");
+      date.innerHTML = post.createdAt;
+      let author = document.querySelector("#category");
+      author.innerHTML = post.author;
+      let youtube = post.youtube;
+      let reviewList = document.querySelector("#restaurantReview");
 
-            // //assigning and displaying those values
-            let name = document.querySelector('#name')
-            name.innerHTML = post.postName
-            let content = document.querySelector('#city')
-            content.innerHTML = post.postContent
-            let date = document.querySelector('#address')
-            date.innerHTML = post.createdAt
-            let author = document.querySelector('#category')
-            author.innerHTML = post.author
-            let youtube = post.youtube
-            let reviewList = document.querySelector("#restaurantReview");
+      var unique = Array.from(new Set(post.reviews));
 
-            var unique = Array.from(new Set(post.reviews));
+      let val;
 
-            let val;
+      function getVideo() {
+        $.ajax({
+          type: "GET",
+          url: "https://www.googleapis.com/youtube/v3/search",
+          data: {
+            key: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+            q: post.youtube,
+            part: "snippet",
+            maxResults: 1,
+            type: "video",
+            videoEmbeddable: true,
+          },
+          success: function (data) {
+            embedVideo(data);
+          },
+          error: function (response) {
+            console.log("Request Failed");
+          },
+        });
+      }
 
-            post.reviews.forEach(function (rev) {
+      function embedVideo(data) {
+        $("iframe").attr(
+          "src",
+          "https://www.youtube.com/embed/" + data.items[0].id.videoId
+        );
+        $("h3").text(data.items[0].snippet.title);
+        $(".description").text(data.items[0].snippet.description);
+      }
 
-                console.log(rev.note);
-                val =
-                    "<p>" +
-                    rev.note +
-                    "</p><p><b>Reviewed By: </b>" +
-                    rev.user +
-                    "</p><hr>";
+      getVideo();
 
+      post.reviews.forEach(function (rev) {
+        console.log(rev.note);
+        val =
+          "<p>" +
+          rev.note +
+          "</p><p><b>Reviewed By: </b>" +
+          rev.user +
+          "</p><hr>";
+      });
 
-                // function getVideo() {
-                //     $.ajax({
-                //         type: 'GET',
-                //         url: 'https://www.googleapis.com/youtube/v3/search',
-                //         data: {
-                //             key: 'AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4',
-                //             q: post.youtube,
-                //             part: 'snippet',
-                //             maxResults: 1,
-                //             type: 'video',
-                //             videoEmbeddable: true,
-                //         },
-                //         success: function (data) {
-                //             embedVideo(data)
-                //         },
-                //         error: function (response) {
-                //             console.log("Request Failed");
-                //         }
-                //     });
-                // }
-
-                // function embedVideo(data) {
-                //     $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
-                //     $('h3').text(data.items[0].snippet.title)
-                //     $('.description').text(data.items[0].snippet.description)
-                // }
-
-                // getVideo();
-
-
-
-
-
-            })
-
-            $("#restauReview").append(val);
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    })
-
-
-// db.collection("posts")
-//     .doc(id)
-//     .onSnapshot((snap) => {
-//         if (snap.exists) {
-//             blogPost = snap.data();
-//             console.log("Document data:", restau);
-
-// db.collection("posts")
-//     .doc(id)
-//     .onSnapshot((snap) => {
-//         if (snap.exists) {
-//             post = snap.data();
-//             console.log("Document data:", post);
-//             //assigning and displaying those values
-//             let name = document.querySelector('#name')
-//             name.innerHTML = post.postName
-//             let content = document.querySelector('#city')
-//             content.innerHTML = post.postContent
-//             let date = document.querySelector('#address')
-//             date.innerHTML = post.createdAt
-//             let author = document.querySelector('#category')
-//             author.innerHTML = post.author
-//             let youtube = post.youtube
-//             let reviewList = document.querySelector("#restauReview");
-
-//             var unique = Array.from(new Set(post.reviews));
-
-//             let val;
-
-//             post.reviews.forEach(function (rev) {
-//                 console.log(rev.note);
-//             })
-
-//             // function getVideo() {
-//             //     $.ajax({
-//             //         type: 'GET',
-//             //         url: 'https://www.googleapis.com/youtube/v3/search',
-//             //         data: {
-//             //             key: 'AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4',
-//             //             q: post.youtube,
-//             //             part: 'snippet',
-//             //             maxResults: 1,
-//             //             type: 'video',
-//             //             videoEmbeddable: true,
-//             //         },
-//             //         success: function (data) {
-//             //             embedVideo(data)
-//             //         },
-//             //         error: function (response) {
-//             //             console.log("Request Failed");
-//             //         }
-//             //     });
-//             // }
-
-//             // function embedVideo(data) {
-//             //     $('iframe').attr('src', 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
-//             //     $('h3').text(data.items[0].snippet.title)
-//             //     $('.description').text(data.items[0].snippet.description)
-//             // }
-
-//             // getVideo();
-//         }
-//     })
+      $("#restauReview").append(val);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  });

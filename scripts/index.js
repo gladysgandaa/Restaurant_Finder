@@ -2,9 +2,10 @@
 const restaurantList = document.querySelector(".restaurants");
 const loggedOutLinks = document.querySelectorAll(".logged-out");
 const loggedInLinks = document.querySelectorAll(".logged-in");
+const whatsonLinks = document.querySelectorAll(".whats-on");
 const accountDetails = document.querySelector(".account-details");
 const adminItems = document.querySelectorAll(".admin");
-const filterSection = document.querySelector(".filter-section")
+const filterSection = document.querySelector(".filter-section");
 /* created an arraylist here so that it is global and i can 
 pass the database info into this list and use it anyway on this page */
 let resList = [
@@ -40,6 +41,7 @@ const setupUI = (user) => {
     //Toggle Logged In UI
     loggedInLinks.forEach((item) => (item.style.display = "block"));
     loggedOutLinks.forEach((item) => (item.style.display = "none"));
+    whatsonLinks.forEach((item) => (item.style.display = "block"));
     const email_verified = user.emailVerified;
 
     if (email_verified) {
@@ -59,7 +61,6 @@ const setupUI = (user) => {
 
 //Take data and cycle all in our index
 const setupRestaurants = (data) => {
-
   //Check if there is data
   //If there is data, run below code
   if (data.length) {
@@ -98,15 +99,14 @@ const setupRestaurants = (data) => {
     });
     console.log(resList);
     restaurantList.innerHTML = html;
-    filterSection.style.visibility = 'visible';
+    filterSection.style.visibility = "visible";
   }
   //Because no user is logged in, no data is fetched meaning data.length = 0
   //Print this code below
   else {
     restaurantList.innerHTML =
       '<h5 class="center-align">Please Login or Sign up </h5>';
-    filterSection.style.visibility = 'hidden';
-
+    filterSection.style.visibility = "hidden";
   }
 };
 
@@ -192,25 +192,65 @@ function getDownloadURL(url) {
     });
 }
 
-
 // Data Filtering
-var query = db.collection("restaurants")
+var query = db.collection("restaurants");
 
-function renderFilter(){
-  query.get()
-  .then(function(querySnapshot) {
+function renderFilter() {
+  query
+    .get()
+    .then(function (querySnapshot) {
       let html = "";
-      querySnapshot.forEach(function(doc) {
+      querySnapshot.forEach(function (doc) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        const restaurant = doc.data();
+        //console.log(doc.id)
+        //PASSING THE DATABASE INFO INTO THE LIST, DATABASE INFO TYPE IS AN OBJECT
+        resList.push({
+          key: doc.id,
+          value: restaurant,
+        });
+        //resList += restaurant;
+        const li = `
+            <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="card">
+            <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
+            <div class="card-body">
+                <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
+                <p class="card-text">${restaurant.address}</p>
+            </div>
+            </div>
+            </div>
+            `;
+
+        html += li;
+      });
+      restaurantList.innerHTML = html;
+    })
+    .catch(function (error) {
+      console.log("Error getting documents: ", error);
+    });
+}
+
+$(".filter").click(function () {
+  const search = $(this).text();
+
+  if (
+    search == "Chinese" ||
+    search == "Japanese" ||
+    search == "Brunch" ||
+    search == "Fusion"
+  ) {
+    console.log(search);
+    db.collection("restaurants")
+      .where("category", "==", search)
+      .get()
+      .then(function (querySnapshot) {
+        let html = "";
+        querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
           const restaurant = doc.data();
-          //console.log(doc.id)
-          //PASSING THE DATABASE INFO INTO THE LIST, DATABASE INFO TYPE IS AN OBJECT
-          resList.push({
-            key: doc.id,
-            value: restaurant,
-          });
-          //resList += restaurant;
           const li = `
             <div class="col-sm-4 col-md-4 col-lg-4">
             <div class="card">
@@ -224,62 +264,25 @@ function renderFilter(){
             `;
 
           html += li;
-      });
-      restaurantList.innerHTML = html;
-  })
-  .catch(function(error) {
-      console.log("Error getting documents: ", error);
-  });
-}
-
-
-$(".filter").click( function(){
-   
-   const search = $(this).text()
-   
-   if(search == 'Chinese' || search =='Japanese' || search =='Brunch' || search == 'Korean'){
-    console.log(search)
-   db.collection("restaurants").where("category", "==", search)
-    .get()
-    .then(function(querySnapshot) {
-      let html = "";
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            const restaurant = doc.data();
-            const li = `
-            <div class="col-sm-4 col-md-4 col-lg-4">
-            <div class="card">
-            <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
-            <div class="card-body">
-                <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
-                <p class="card-text">${restaurant.address}</p>
-            </div>
-            </div>
-            </div>
-            `;
-
-          html += li;
-        });  
+        });
         restaurantList.innerHTML = html;
-    })
-    .catch(function(error) {
+      })
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
-    });
-  }
-  else if(search == 'All'){
-    console.log(search)
+      });
+  } else if (search == "All") {
+    console.log(search);
 
     db.collection("restaurants")
-    .get()
-    .then(snap => {
-      let html = ''
-    snap.forEach(doc => {
-        console.log(doc.data());
-        console.log(doc.id);
+      .get()
+      .then((snap) => {
+        let html = "";
+        snap.forEach((doc) => {
+          console.log(doc.data());
+          console.log(doc.id);
 
-        const restaurant = doc.data();
-             const li = `
+          const restaurant = doc.data();
+          const li = `
              <div class="col-sm-4 col-md-4 col-lg-4">
              <div class="card">
              <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
@@ -290,24 +293,31 @@ $(".filter").click( function(){
              </div>
              </div>
              `;
- 
-           html += li;
-    }); restaurantList.innerHTML = html;
-    });
-  }
 
-  else if(search == '$' || '$$' || '$$$' || '$$$$'){
-    console.log(search)
-    db.collection("restaurants").where("price", "==", search)
-     .get()
-     .then(function(querySnapshot) {
-       let html = ''
-         querySnapshot.forEach(function(doc) {
-             // doc.data() is never undefined for query doc snapshots
-             console.log(doc.id, " => ", doc.data());
+          html += li;
+        });
+        restaurantList.innerHTML = html;
+      });
+  } else if (
+    search == "Melbourne" ||
+    "St Kilda" ||
+    "Fitzroy" ||
+    "Brunswick" ||
+    "Windsor" ||
+    "Richmond"
+  ) {
+    console.log(search);
+    db.collection("restaurants")
+      .where("city", "==", search)
+      .get()
+      .then(function (querySnapshot) {
+        let html = "";
+        querySnapshot.forEach(function (doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
 
-             const restaurant = doc.data();
-             const li = `
+          const restaurant = doc.data();
+          const li = `
              <div class="col-sm-4 col-md-4 col-lg-4">
              <div class="card">
              <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
@@ -318,13 +328,51 @@ $(".filter").click( function(){
              </div>
              </div>
              `;
- 
-           html += li;
-         }); restaurantList.innerHTML = html;
-     })
-     .catch(function(error) {
-         console.log("Error getting documents: ", error);
-     });
-  }
-})
 
+          html += li;
+        });
+        restaurantList.innerHTML = html;
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+
+  if (
+    search == "$" ||
+    search == "$$" ||
+    search == "$$$" ||
+    search == "$$$$" ||
+    search == "$$$$$"
+  ) {
+    console.log(search);
+    db.collection("restaurants")
+      .where("price", "==", search)
+      .get()
+      .then(function (querySnapshot) {
+        let html = "";
+        querySnapshot.forEach(function (doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+          const restaurant = doc.data();
+          const li = `
+              <div class="col-sm-4 col-md-4 col-lg-4">
+              <div class="card">
+              <img class="card-img-top" src=${restaurant.image} alt="Card image cap">
+              <div class="card-body">
+                  <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
+                  <p class="card-text">${restaurant.address}</p>
+              </div>
+              </div>
+              </div>
+              `;
+
+          html += li;
+        });
+        restaurantList.innerHTML = html;
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
+});
