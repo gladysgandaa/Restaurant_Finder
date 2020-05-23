@@ -181,3 +181,9 @@ function sendVerification() {
       // An error happened.
     });
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 274efff489e4935b5193532ce87208887485c017

@@ -118,6 +118,7 @@ function showPage(link) {
   /* loop through my array list of restaurant data to find 
     the restaurant that has same restaurant name as that of the button clicked */
 
+<<<<<<< HEAD
   postList.forEach(function (post) {
     if (post.value.postName === link.innerText) {
       console.log("Found U: ", post.value.postName);
@@ -132,3 +133,19 @@ function showPage(link) {
     location.replace("/content.html?id=" + link.innerText);
   });
 }
+=======
+    postList.forEach(function (post) {
+        if (post.value.postName === link.innerText) {
+            console.log("Found U: ", post.value.postName);
+            listValue = post.value;
+            console.log(listValue);
+
+            sessionStorage.setItem("id", post.key);
+            sessionStorage.setItem("value", JSON.stringify(listValue));
+            sessionStorage.setItem("userEmail", userEmail);
+            console.log(userEmail)
+        }
+        location.replace("/content.html?id=" + link.innerText);
+    })}
+    
+>>>>>>> 274efff489e4935b5193532ce87208887485c017
