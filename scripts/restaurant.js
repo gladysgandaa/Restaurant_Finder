@@ -74,45 +74,6 @@ db.collection("restaurants")
     }
   });
 
-// db.collection("restaurants").doc(id)
-// .get()
-// .then(doc =>{
-//   if (doc.exists) {
-//   restau = doc.data()
-//   console.log("Document data:", restau.name);
-
-// let name = document.querySelector("#name");
-// name.innerHTML = restau.name;
-// let city = document.querySelector("#city");
-// city.innerHTML = restau.city;
-// let address = document.querySelector("#address");
-// address.innerHTML = restau.address;
-// let cat = document.querySelector("#category");
-// cat.innerHTML = restau.category;
-// let price = document.querySelector("#price");
-// price.innerHTML = restau.price;
-// let description = document.querySelector("#description");
-// description.innerHTML = restau.description;
-// let image = document.querySelector("#image");
-// image.innerHTML = '<img src="' + restau.image + '" />';
-// let reviewList = document.querySelector("#restauReview");
-
-//   console.log(restau.name)
-//  restau.reviews.forEach(function(rev) {
-//      if(rev){
-//         console.log(rev.note)
-//         $('#restauReview').append("<p>" +rev.note+"</p><p><b>Reviewed By: </b>"+rev.user+"</p>")
-
-//      }
-
-//  })
-
-// } else {
-//     // doc.data() will be undefined in this case
-//     console.log("No such document!");
-// }
-
-//   })
 
 //Review Form
 const reviewForm = document.querySelector("#submitReview");
@@ -230,6 +191,8 @@ function initMap() {
             console.log(
               `Lat: ${position.coords.latitude} Lng: ${position.coords.longitude}`
             );
+
+            console.log(position.coords.latitude);
 
             // Set marker's position.
             var userLatLng = new google.maps.LatLng(

@@ -61,23 +61,16 @@ const setupUI = (user) => {
 
 //Take data and cycle all in our index
 const setupRestaurants = (data) => {
-  //Check if there is data
-  //If there is data, run below code
   if (data.length) {
-    //window.location.href = '/restau.html'
     let html = "";
     let html2 = "";
-    //Loop every document
     data.forEach((doc) => {
-      //data() to get details of the object in DB
       const restaurant = doc.data();
-      //console.log(doc.id)
       //PASSING THE DATABASE INFO INTO THE LIST, DATABASE INFO TYPE IS AN OBJECT
       resList.push({
         key: doc.id,
         value: restaurant,
       });
-      //resList += restaurant;
       const li = `
         <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="card">
@@ -89,10 +82,6 @@ const setupRestaurants = (data) => {
         </div>
         </div>
         `;
-
-      // const filter = `
-
-      // `
 
       html += li;
       // html2 = filter;
