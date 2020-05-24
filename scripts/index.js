@@ -63,7 +63,6 @@ const setupUI = (user) => {
 const setupRestaurants = (data) => {
   if (data.length) {
     let html = "";
-    let html2 = "";
     data.forEach((doc) => {
       const restaurant = doc.data();
       //PASSING THE DATABASE INFO INTO THE LIST, DATABASE INFO TYPE IS AN OBJECT
@@ -78,13 +77,13 @@ const setupRestaurants = (data) => {
         <div class="card-body">
             <a class="card-title" onClick="showPage(this)">${restaurant.name}</a>
             <p class="card-text">${restaurant.address}</p>
+            <p><span id="msg"></span></p>
         </div>
         </div>
         </div>
         `;
 
       html += li;
-      // html2 = filter;
     });
     console.log(resList);
     restaurantList.innerHTML = html;
@@ -139,46 +138,6 @@ function showPage(link) {
     //redirecting to another page with id showing up in the url to tell u what u r viewing
     location.replace("/restau.html?id=" + link.innerText);
   });
-}
-
-function upload() {
-  var image = document.getElementById("image").files[0];
-
-  var imageName = image.name;
-
-  var storageRef = firebase.storage().ref("images/" + imageName);
-
-  var uploadTask = storageRef.put(image);
-
-  uploadTask.on(
-    "state_changed",
-    function (snapshot) {
-      var progress = (snapshot.bytesTransfereed / snapshot) * 100;
-      console.log("upload is" + progress + "done");
-    },
-    function (error) {
-      console.log(error.message);
-    },
-    function () {
-      uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        console.log(downloadURL);
-      });
-    }
-  );
-}
-
-function getDownloadURL(url) {
-  var StarsRef = storageRef.child("images/" + file.name);
-  starsRef
-    .getDownloadURL()
-    .then(function (url) {
-      document.querySelector("#preview").src = url;
-      var t = document.querySelector("p");
-      t.innerHTML = "<b>Firebase Storage URL: </b>" + url;
-    })
-    .catch(function (error) {
-      console.log("Error Downloading File");
-    });
 }
 
 // Data Filtering
@@ -365,3 +324,4 @@ $(".filter").click(function () {
       });
   }
 });
+

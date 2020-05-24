@@ -191,6 +191,15 @@ iframe{
   text-decoration: underline;
 }
 
+.comment-submit{
+  float: left !important;
+}
+
+.user-comment{
+  background-color: white;
+  padding: 30px;
+}
+
 /*Footer */
 
 

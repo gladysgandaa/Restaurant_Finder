@@ -20,12 +20,6 @@ const id = sessionStorage.getItem("id");
 const userID = sessionStorage.getItem("userID");
 console.log(id);
 
-//   db.collection("restaurants").doc(id)
-// .onSnapshot(function(doc) {
-//     console.log("Current data: ", doc.data());
-//     console.log("new message: ", doc.data().reviews )
-// });
-
 
 //Review Form
 const reviewForm = document.querySelector("#submitReview");
@@ -80,55 +74,14 @@ db.collection("restaurants")
       let reviewList = document.querySelector("#restauReview");
 
       var unique = Array.from(new Set(restau.reviews));
-      //console.log(unique)
-      // restau.reviews.map(rev =>{
-      //     $('#restauReview p').remove()
-      //     $('#restauReview').append("<p>" +rev.note+"</p><p><b>Reviewed By: </b>"+rev.user+"</p>")
-
-      // })
       let val;
       var results = [];
       var users = [];
 
-      // const reviewForm = document.querySelector("#submitReview");
-      // const review = document.querySelector("#review");
-      // `import firebase from "firebase/firebase";`;
-
-      // reviewForm.addEventListener("click", function (e) {
-      //   const msg = review.value;
-      //   console.log(msg);
-      //   if (msg == "") {
-      //     return;
-      //   }
-      //   db.collection("restaurants")
-      //     .doc(id)
-      //     .update({
-      //       reviews: firebase.firestore.FieldValue.arrayUnion({
-      //         user: userID,
-      //         note: msg,
-      //       }),
-      //     });
-      //   review.value = "";
-
-      //   function clearBox(elementID) {
-      //     document.getElementById(elementID).innerHTML = "";
-      //   }
-      //   clearBox("restauReview")
-      // });
 
       restau.reviews.forEach(function (rev) {
-        console.log(rev.note);
-        console.log(rev.user);
         results.push(rev.note);
         users.push(rev.user);
-        // console.log(results);
-
-        // val =
-        //   "<p>" +
-        //   rev.note +
-        //   "</p><p><b>Reviewed By: </b>" +
-        //   rev.user +
-        //   "</p><hr>";
       });
 
       console.log(results);
@@ -138,48 +91,19 @@ db.collection("restaurants")
       for (var i = 0; i < results.length; i++) {
         restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
       }
-
-      // for (var i = 0; i < arr.length; i++)
-      // restauReview.innerHTML += "<p>" + arr[i] + "</p><br>";
-
-      // var arrayLength = results.length;
-      // for (var i = 0; i < arrayLength; i++) {
-      //   console.log(results[i]);
-      //   console.log(users[i]);
-      //   console.log("hi")
-      //   console.log("=========================================")
-      //   // val =
-      //   //   "<p>" +
-      //   //   results[i] +
-      //   //   "</p><p><b>Reviewed By: </b>" +
-      //   //   users[i] +
-      //   //   "</p><hr>";
-      //   holder.innerHTML += "<p>" + results[i] + "</p><br><p> Reviewed By :" + users[i] + "</p></hr>";
-      //   //Do something
-      // }
-
-
-
-
-      // $("#restauReview").append(val);
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   });
 
 
-
-
-//$("#submitReview").click(() => location.reload())
-
-function haversine_distance(Marker1, Marker2) {
+function haversine_distance(marker1, marker2) {
   var R = 6371.071; // Radius of the Earth in miles
-  var rlat1 = Marker1.position.lat() * (Math.PI / 180); // Convert degrees to radians
-  var rlat2 = Marker2.position.lat() * (Math.PI / 180); // Convert degrees to radians
+  var rlat1 = marker1.position.lat() * (Math.PI / 180); // Convert degrees to radians
+  var rlat2 = marker2.position.lat() * (Math.PI / 180); // Convert degrees to radians
   var difflat = rlat2 - rlat1; // Radian difference (latitudes)
   var difflon =
-    (Marker2.position.lng() - Marker1.position.lng()) * (Math.PI / 180); // Radian difference (longitudes)
+    (marker2.position.lng() - marker1.position.lng()) * (Math.PI / 180); // Radian difference (longitudes)
 
   var d =
     2 *
@@ -196,12 +120,12 @@ function haversine_distance(Marker1, Marker2) {
   return d;
 }
 
-// Initialize MAP
-function initMap() {
+
+x = navigator.geolocation;
+x.getCurrentPosition(success,failure);
+
+function success(position){
   var restaurants = [{}];
-
-  // The location of Uluru
-
   db.collection("restaurants")
     .get()
     .then((docs) => {
@@ -212,118 +136,90 @@ function initMap() {
         }
       });
 
-      var sessionData = JSON.parse(sessionStorage.getItem("value"));
-      console.log(sessionData);
+  var sessionData = JSON.parse(sessionStorage.getItem("value"));
+  console.log(sessionData);
 
-      // var directionsDisplay = new google.maps.DirectionsRenderer();
-      // var directionsService = new google.maps.DirectinosService();
+  var myLat = position.coords.latitude;
+  var myLong = position.coords.longitude;
 
-      var latitude = sessionData["Location"]["Pc"];
-      var longitude = sessionData["Location"]["Vc"];
-      var victoria = {
-        lat: latitude,
-        lng: longitude,
-      };
-      // The map, centered at Uluru
-      var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
-        center: victoria,
-      });
 
-      var contentString = "Restaurant";
+  var coords = new google.maps.LatLng(myLat,myLong);
+  var rest = new google.maps.LatLng(latitude,longitude);
+  var latitude = sessionData["Location"]["Pc"];
+  var longitude = sessionData["Location"]["Vc"];
+  var victoria = {
+    lat: latitude,
+    lng: longitude,
+  };
+  var user = {
+    lat: myLat,
+    lng: myLong,
+  }
 
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-      });
+  var contentString = "Restaurant";
 
-      // The marker, positioned at Uluru
-      var Marker1 = new google.maps.Marker({
-        position: victoria,
-        map: map,
-      });
-      Marker1.setMap(map);
-      Marker1.addListener("click", function () {
-        infowindow.open(map, Marker1);
-      });
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
+  console.log(victoria);
+  console.log(user);
 
-      const initialPosition = {
-        lat: -37.81427,
-        lng: 144.947554,
-      };
-      const Marker2 = new google.maps.Marker({
-        map,
-        position: initialPosition,
-        icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-        },
-      });
+  var mapOptions = {
+    zoom:9,
+    center: coords,
+    mapType: google.maps.MapTypeId.ROADMAP
+  }
+  
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            console.log(
-              `Lat: ${position.coords.latitude} Lng: ${position.coords.longitude}`
-            );
+  var marker1 = new google.maps.Marker({
+    position: user,
+    map: map
+  })
+  var marker2 = new google.maps.Marker({
+    position: victoria,
+    map: map,
+  });
+  marker1.setMap(map);
+  marker2.setMap(map);
 
-            console.log(position.coords.latitude);
+    var distance = haversine_distance(marker1, marker2);
+    document.getElementById("msg").innerHTML =
+    distance.toFixed(2) + " km away";
 
-            // Set marker's position.
-            var userLatLng = new google.maps.LatLng(
-              position.coords.latitude,
-              position.coords.longitude
-            );
-            Marker2.setPosition({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
+    let directionsService = new google.maps.DirectionsService();
+    let directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+    const route = {
+      origin: user,
+      destination: victoria,
+      travelMode: "DRIVING",
+    };
 
-            // Center map to user's position.
-            map.panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          },
-          (err) =>
-            alert(`Error (${err.code}): ${getPositionErrorMessage(err.code)}`)
-        );
+    directionsService.route(route, function (response, status) {
+      if (status !== "OK") {
+        window.alert("Directions request failed due to " + status);
+        return;
       } else {
-        alert("Geolocation is not supported by your browser.");
-      }
-
-      var distance = haversine_distance(Marker1, Marker2);
-      document.getElementById("msg").innerHTML =
-        distance.toFixed(2) + " km away";
-
-      let directionsService = new google.maps.DirectionsService();
-      let directionsRenderer = new google.maps.DirectionsRenderer();
-      directionsRenderer.setMap(map); // Existing map object displays directions
-      // Create route from existing points used for markers
-      const route = {
-        origin: initialPosition,
-        destination: victoria,
-        travelMode: "DRIVING",
-      };
-
-      directionsService.route(route, function (response, status) {
-        // anonymous function to capture directions
-        if (status !== "OK") {
-          window.alert("Directions request failed due to " + status);
+        directionsRenderer.setDirections(response);
+        var directionsData = response.routes[0].legs[0];
+        if (!directionsData) {
+          window.alert("Directions request failed");
           return;
         } else {
-          directionsRenderer.setDirections(response); // Add route to the map
-          var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
-          if (!directionsData) {
-            window.alert("Directions request failed");
-            return;
-          } else {
-            document.getElementById("msg").innerHTML +=
-              "<br>Driving distance is " +
-              directionsData.distance.text +
-              " (" +
-              directionsData.duration.text +
-              ").";
-          }
+          document.getElementById("msg").innerHTML +=
+            "<br>Driving distance is " +
+            directionsData.distance.text +
+            " (" +
+            directionsData.duration.text +
+            ").";
         }
-      });
+      }
     });
+})
 }
+
+
+
+function failure(){}
+

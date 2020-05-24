@@ -88,7 +88,7 @@ db.collection("posts")
             })
             console.log(results)
             for (var i = 0; i < results.length; i++) {
-                restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
+                restauReview.innerHTML += "<p>" + results[i] + "</p><p>Commented by: " + users[i] + "</p><hr>";
             }
         } else {
             console.log("No such document")
