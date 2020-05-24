@@ -187,3 +187,34 @@ function sendVerification() {
 }
 
 
+const resetForm = document.querySelector("#forgot-form");
+resetForm.addEventListener("click", (e) => {
+  //To not refresh the page
+  e.preventDefault();
+
+ 
+  //Take the input
+  const userEmail = resetForm["forgot-email"].value;
+
+
+  auth
+    .sendPasswordResetEmail(userEmail).then(function () {
+      // Email sent.
+      alert("Email Sent")
+    })
+    .catch(function (error) {
+      // An error happened.
+    })
+    .then(() => {
+      //Close the modal and reset form
+      const modal = document.querySelector("#modal-create");
+      M.Modal.getInstance(modal).close();
+      signupForm.reset();
+    })
+    .catch(function (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      window.alert("Error :" + errorMessage);
+    });
+});
+

@@ -6,6 +6,9 @@ const whatsonLinks = document.querySelectorAll(".whats-on");
 const accountDetails = document.querySelector(".account-details");
 const adminItems = document.querySelectorAll(".admin");
 const filterSection = document.querySelector(".filter-section");
+const deleteButton = document.querySelectorAll('.delete')
+
+
 /* created an arraylist here so that it is global and i can 
 pass the database info into this list and use it anyway on this page */
 let resList = [
@@ -16,11 +19,14 @@ let resList = [
 ];
 
 let userID = "";
+let userAdmin = "";
+
 
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
       adminItems.forEach((item) => (item.style.display = "block"));
+      deleteButton.forEach(item => item.style.display = 'block');
     }
     //Account info
     //To get access to bio from DB
@@ -36,18 +42,27 @@ const setupUI = (user) => {
             `;
         accountDetails.innerHTML = html;
         userID = user.email;
+        if (user.admin) {
+          userAdmin = "admin"
+        } else {
+          userAdmin = "not admin 1"
+        }
       });
 
     //Toggle Logged In UI
     loggedInLinks.forEach((item) => (item.style.display = "block"));
     loggedOutLinks.forEach((item) => (item.style.display = "none"));
     whatsonLinks.forEach((item) => (item.style.display = "block"));
-    const email_verified = user.emailVerified;
 
+    const email_verified = user.emailVerified;
     if (email_verified) {
       document.getElementById("verified").style.display = "none";
+      document.getElementById("verify").style.display = "block";
+      document.getElementById("verify2").style.display = "none";
     } else {
       document.getElementById("verified").style.display = "block";
+      document.getElementById("verify").style.display = "none";
+      document.getElementById("verify2").style.display = "block";
     }
   } else {
     adminItems.forEach((item) => (item.style.display = "none"));
@@ -133,6 +148,8 @@ function showPage(link) {
       sessionStorage.setItem("id", restau.key);
       sessionStorage.setItem("value", JSON.stringify(listValue));
       sessionStorage.setItem("userID", userID);
+      sessionStorage.setItem("userAdmin",userAdmin);
+      console.log(userAdmin)
       //console.log(userID)
     }
     //redirecting to another page with id showing up in the url to tell u what u r viewing

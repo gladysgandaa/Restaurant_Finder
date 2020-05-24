@@ -18,9 +18,29 @@ const db = firebase.firestore();
 let post;
 const id = sessionStorage.getItem("id");
 const userID = sessionStorage.getItem("userEmail");
+const userAdmin = sessionStorage.getItem("userAdmin");
 console.log(id);
 console.log(userID);
+console.log(userAdmin);
+const loggedInLinks = document.querySelectorAll('.logged-in');
+const loggedOutLinks = document.querySelectorAll('.logged-out');
 
+if(userAdmin != "admin"){
+    loggedInLinks.forEach(item => item.style.display = 'none');
+} else {
+    loggedInLinks.forEach(item => item.style.display = 'block');
+}
+
+// setup materialize components
+document.addEventListener('DOMContentLoaded', function () {
+
+    var modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
+
+    var items = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(items);
+
+});
 
 
 
@@ -138,6 +158,6 @@ deleteButton.addEventListener("click", function (e) {
     deletePost();
     setTimeout(function(){
         window.location.href = "/blog.html"
-    },2000)
+    },1000)
 
 })

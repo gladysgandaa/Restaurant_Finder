@@ -4,6 +4,7 @@ const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
 const adminItems = document.querySelectorAll('.admin');
+const deleteButton = document.querySelectorAll('.delete')
 
 /* created an arraylist here so that it is global and i can 
 pass the database info into this list and use it anyway on this page */
@@ -15,11 +16,13 @@ let postList = [
 ];
 
 let userEmail = ""
+let userAdmin = "" ;
 
 const setupUI = (user) => {
     if (user) {
         if (user.admin) {
             adminItems.forEach(item => item.style.display = 'block');
+            deleteButton.forEach(item => item.style.display = 'block');
         }
         //Account info
         //To get access to bio from DB
@@ -32,6 +35,11 @@ const setupUI = (user) => {
             `;
             accountDetails.innerHTML = html;
             userEmail = user.email;
+            if(user.admin){
+                userAdmin = "admin"
+            }else{
+                userAdmin = "not admin 1"
+            }
         });
 
         //Toggle Logged In UI
@@ -40,9 +48,13 @@ const setupUI = (user) => {
         const email_verified = user.emailVerified;
         if (email_verified) {
             document.getElementById("verified").style.display = "none";
-        } else {
+            document.getElementById("verify").style.display = "block";
+            document.getElementById("verify2").style.display = "none";
+          } else {
             document.getElementById("verified").style.display = "block";
-        }
+            document.getElementById("verify").style.display = "none";
+            document.getElementById("verify2").style.display = "block";
+          }
     } else {
         adminItems.forEach(item => item.style.display = 'none');
         //Hide account info
@@ -129,7 +141,9 @@ function showPage(link) {
             sessionStorage.setItem("id", post.key);
             sessionStorage.setItem("value", JSON.stringify(listValue));
             sessionStorage.setItem("userEmail", userEmail);
+            sessionStorage.setItem("userAdmin",userAdmin);
             console.log(userEmail)
+            console.log(userAdmin)
         }
         location.replace("/content.html?id=" + link.innerText);
     })
