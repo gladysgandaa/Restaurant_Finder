@@ -18,9 +18,26 @@ const db = firebase.firestore();
 let restau;
 const id = sessionStorage.getItem("id");
 const userID = sessionStorage.getItem("userID");
+const userAdmin = sessionStorage.getItem("userAdmin");
 console.log(id);
+console.log(userAdmin);
+const loggedInLinks = document.querySelectorAll('.logged-in');
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+
+if (userAdmin != "admin") {
+  loggedInLinks.forEach(item => item.style.display = 'none');
+} else {
+  loggedInLinks.forEach(item => item.style.display = 'block');
+}
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  var modals = document.querySelectorAll(".modal");
+  M.Modal.init(modals);
+
+  var items = document.querySelectorAll(".collapsible");
+  M.Collapsible.init(items);
+});
 
 
 
@@ -77,7 +94,7 @@ db.collection("restaurants")
       let reviewList = document.querySelector("#restauReview");
 
       var unique = Array.from(new Set(restau.reviews));
-     
+
       let val;
       var results = [];
       var users = [];
@@ -88,7 +105,7 @@ db.collection("restaurants")
         console.log(rev.user);
         results.push(rev.note);
         users.push(rev.user);
- 
+
       });
 
       console.log(results);
@@ -99,7 +116,7 @@ db.collection("restaurants")
         restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
       }
 
-     
+
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -260,3 +277,22 @@ function initMap() {
       });
     });
 }
+
+//Delete button
+const deleteButton = document.getElementById("delete");
+deleteButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  function deletePost() {
+    var ask = window.confirm("Are you sure you want to delete this post?");
+    if (ask) {
+      db.collection('restaurants').doc(id).delete();
+      window.alert("This restaurants was successfully deleted. ");
+      console.log(id)
+    }
+  }
+  deletePost();
+  setTimeout(function () {
+    window.location.href = "/index.html"
+  }, 1000)
+
+})

@@ -6,6 +6,7 @@ const whatsonLinks = document.querySelectorAll(".whats-on");
 const accountDetails = document.querySelector(".account-details");
 const adminItems = document.querySelectorAll(".admin");
 const filterSection = document.querySelector(".filter-section");
+const deleteButton = document.querySelectorAll('.delete')
 
 
 /* created an arraylist here so that it is global and i can 
@@ -18,13 +19,14 @@ let resList = [
 ];
 
 let userID = "";
-
+let userAdmin = "";
 
 
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
       adminItems.forEach((item) => (item.style.display = "block"));
+      deleteButton.forEach(item => item.style.display = 'block');
     }
     //Account info
     //To get access to bio from DB
@@ -40,6 +42,11 @@ const setupUI = (user) => {
             `;
         accountDetails.innerHTML = html;
         userID = user.email;
+        if (user.admin) {
+          userAdmin = "admin"
+        } else {
+          userAdmin = "not admin 1"
+        }
       });
 
     //Toggle Logged In UI
@@ -153,6 +160,8 @@ function showPage(link) {
       sessionStorage.setItem("id", restau.key);
       sessionStorage.setItem("value", JSON.stringify(listValue));
       sessionStorage.setItem("userID", userID);
+      sessionStorage.setItem("userAdmin",userAdmin);
+      console.log(userAdmin)
       //console.log(userID)
     }
     //redirecting to another page with id showing up in the url to tell u what u r viewing
