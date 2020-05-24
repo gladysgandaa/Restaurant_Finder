@@ -1,0 +1,187 @@
+<html>
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            background: #eab0dc;
+            font-family: ubuntu;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 64px;
+            letter-spacing: 2px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .content {
+            background: #fff;
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 20px 30px;
+            border-radius: 10px 120px 10px 10px;
+            box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1)
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 20px;
+            background: #f6f6f6;
+            font-size: 20px;
+            color: #555;
+            position: relative;
+            border-bottom: 1px solid #e6e6e6;
+            height: 46px;
+        }
+
+        li:nth-child(even) {
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        li span {
+            display: block;
+        }
+
+        li span:nth-child(2) {
+            font-size: 16px;
+            margin-top: 6px;
+            color: #999;
+        }
+
+        li div {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            background: rgba(255, 255, 255, 0.6);
+            width: 40px;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        form input {
+            float: left;
+            width: 38%;
+            margin: 0;
+            border: 0;
+            border-bottom: 1px solid #eee;
+            margin: 0 1%;
+            padding: 10px;
+            display: block;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        form input:focus {
+            outline: none;
+            border-bottom: 3px solid #88236f;
+            padding-bottom: 8px;
+            transition: all ease 0.2s;
+        }
+
+        form:after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        button {
+            border: 0;
+            background: #fff;
+            border-radius: 10px;
+            padding: 13px;
+            width: 14%;
+            box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            font-family: ubuntu;
+            letter-spacing: 1px;
+            color: #999;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Cloud Cafe</h1>
+
+    <div class="content">
+
+        <form id="add-cafe-form">
+            <input type="text" name="name" placeholder="Cafe name">
+            <input type="text" name="city" placeholder="Cafe city">
+            <button>Add Cafe</button>
+        </form>
+
+        <ul id="cafe-list"></ul>
+
+    </div>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+            authDomain: "form-50005.firebaseapp.com",
+            databaseURL: "https://form-50005.firebaseio.com",
+            projectId: "form-50005",
+            storageBucket: "form-50005.appspot.com",
+            messagingSenderId: "790644686206",
+            appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true }); 
+    </script>
+    <script>
+        const cafeList = document.querySelector('#cafe-list');
+        const form = document.querySelector('#add-cafe-form');
+
+        // create element & render cafe
+        function renderCafe(doc) {
+            let li = document.createElement('li');
+            let name = document.createElement('span');
+            let city = document.createElement('span');
+            let cross = document.createElement('div');
+
+            li.setAttribute('data-id', doc.id);
+            name.textContent = doc.data().postName;
+            city.textContent = doc.data().author;
+            cross.textContent = 'x';
+
+            li.appendChild(name);
+            li.appendChild(city);
+            li.appendChild(cross);
+
+            cafeList.appendChild(li);
+
+            // deleting data
+            cross.addEventListener('click', (e) => {
+                e.stopPropagation();
+                let id = e.target.parentElement.getAttribute('data-id');
+                db.collection('cafes').doc(id).delete();
+            });
+        }
+
+        // getting data
+        db.collection('posts').get().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                renderCafe(doc);
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

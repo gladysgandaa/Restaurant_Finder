@@ -1,58 +1,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="styles/main.css" type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="styles/main.css" type="text/css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Munchies</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Munchies</title>
 </head>
 
 <body class="grey ligthen=3">
-    <!-- NAVBAR -->
-    <nav class="z-depth-0 grey lighten-4">
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">
-                <img onclick="window.location.href ='/index.html'" src="img/logo.png"
-                    style="width: 180px; margin-top: 10px;">
-            </a>
+  <!-- NAVBAR -->
+  <nav class="z-depth-0 grey lighten-4">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">
+        <img onclick="window.location.href ='/index.html'" src="img/logo.png" style="width: 180px; margin-top: 10px;">
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="row">
+
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+        <br>
+        <a href="blog.html" class="back-button">Back</a>
+        <button  class="btn red darken-2 z-depth-0 admin" id="delete"> Delete Article </button>
+        <br>
+        <!-- Title -->
+        <h1 class="mt-4" id="name"></h1>
+
+        <!-- Author -->
+        <div class="blog-author">
+          by
+          <p id="author"></p>
         </div>
-    </nav>
+        <div class="createdTime">Created on <p id="time"></p>
+        </div>
 
-    <div class="container">
+        <hr>
 
-        <div class="row">
-    
+        <iframe src=""></iframe>
+        <h3></h3>
+        <p>
+          <hr>
+        <div id="content"></div>
+        <hr>
 
-          <!-- Post Content Column -->
-          <div class="col-lg-8">
-            <br>
-            <a href="blog.html" class="back-button">Back</a>
-            <br>
-            <!-- Title -->
-            <h1 class="mt-4" id="name"></h1>
-    
-            <!-- Author -->
-            <div class="blog-author">
-              by  
-              <p id="author"></p>
-            </div>
-            <div class="createdTime">Created on <p id="time"></p> </div>
-            
-            <hr>
+        <br><br>
+        <div class="restaurant-review" style="text-align: center;">
+          <h3>Comment here</h3>
+          <br>
+          <div class="review-text"><textarea id="review" rows="6" cols="20" placeholder="Comment Here"
+              style="width: 50%; height: 20%; background-color: aliceblue;"></textarea>
+          </div>
+          <br>
+          <div class="review-submit">
+            <input type="button" value="Add Comment" id="submitReview" style="display: block;margin: auto;" />
+          </div><br><br>
+          <ul>
+            <li>
+              <div id="restauReview" style="margin-bottom: 50px;"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-            <iframe src=""></iframe>
-            <h3></h3><p>
-                <hr><div id="content"></div>
-            <hr>
-    
-            <div class="card blog-comment my-4">
+      <!-- <div class="card blog-comment my-4">
               <h5 class="card-header">Leave a Comment:</h5>
               <div class="card-body">
                 <form>
@@ -70,10 +92,10 @@
                         
                     </div>
                 </li>
-            </ul>
-    
-            <!-- Single Comment -->
-            <div class="media mb-4">
+            </ul> -->
+
+      <!-- Single Comment -->
+      <!-- <div class="media mb-4">
               <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
               <div class="media-body">
                 <h5 class="mt-0">Commenter Name</h5>
@@ -85,18 +107,19 @@
               </div>
             </div>
     
-          </div>
+          </div> -->
 
-    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- <script src="scripts/blog.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <!-- <script src="scripts/blog.js"></script>
     <script src="scripts/content.js"></script> -->
-    <script src="scripts/test.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      <script src="scripts/test.js"></script>
+      
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 

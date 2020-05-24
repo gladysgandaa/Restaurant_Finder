@@ -26,6 +26,36 @@ console.log(id);
 //     console.log("new message: ", doc.data().reviews )
 // });
 
+
+//Review Form
+const reviewForm = document.querySelector("#submitReview");
+const review = document.querySelector("#review");
+`import firebase from "firebase/firebase";`;
+
+reviewForm.addEventListener("click", function (e) {
+  const msg = review.value;
+  console.log(msg);
+  if (msg == "") {
+    return;
+  }
+  db.collection("restaurants")
+    .doc(id)
+    .update({
+      reviews: firebase.firestore.FieldValue.arrayUnion({
+        user: userID,
+        note: msg,
+      }),
+    });
+  review.value = "";
+
+  //Delete innerHTML to not re-print the innerHTML
+  function clearBox(elementID) {
+    document.getElementById(elementID).innerHTML = "";
+  }
+  clearBox("restauReview")
+});
+
+
 db.collection("restaurants")
   .doc(id)
   .onSnapshot((snap) => {
@@ -57,17 +87,81 @@ db.collection("restaurants")
 
       // })
       let val;
+      var results = [];
+      var users = [];
+
+      // const reviewForm = document.querySelector("#submitReview");
+      // const review = document.querySelector("#review");
+      // `import firebase from "firebase/firebase";`;
+
+      // reviewForm.addEventListener("click", function (e) {
+      //   const msg = review.value;
+      //   console.log(msg);
+      //   if (msg == "") {
+      //     return;
+      //   }
+      //   db.collection("restaurants")
+      //     .doc(id)
+      //     .update({
+      //       reviews: firebase.firestore.FieldValue.arrayUnion({
+      //         user: userID,
+      //         note: msg,
+      //       }),
+      //     });
+      //   review.value = "";
+
+      //   function clearBox(elementID) {
+      //     document.getElementById(elementID).innerHTML = "";
+      //   }
+      //   clearBox("restauReview")
+      // });
 
       restau.reviews.forEach(function (rev) {
         console.log(rev.note);
-        val =
-          "<p>" +
-          rev.note +
-          "</p><p><b>Reviewed By: </b>" +
-          rev.user +
-          "</p><hr>";
+        console.log(rev.user);
+        results.push(rev.note);
+        users.push(rev.user);
+        // console.log(results);
+
+        // val =
+        //   "<p>" +
+        //   rev.note +
+        //   "</p><p><b>Reviewed By: </b>" +
+        //   rev.user +
+        //   "</p><hr>";
       });
-      $("#restauReview").append(val);
+
+      console.log(results);
+
+
+
+      for (var i = 0; i < results.length; i++) {
+        restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
+      }
+
+      // for (var i = 0; i < arr.length; i++)
+      // restauReview.innerHTML += "<p>" + arr[i] + "</p><br>";
+
+      // var arrayLength = results.length;
+      // for (var i = 0; i < arrayLength; i++) {
+      //   console.log(results[i]);
+      //   console.log(users[i]);
+      //   console.log("hi")
+      //   console.log("=========================================")
+      //   // val =
+      //   //   "<p>" +
+      //   //   results[i] +
+      //   //   "</p><p><b>Reviewed By: </b>" +
+      //   //   users[i] +
+      //   //   "</p><hr>";
+      //   holder.innerHTML += "<p>" + results[i] + "</p><br><p> Reviewed By :" + users[i] + "</p></hr>";
+      //   //Do something
+      // }
+
+
+
+
+      // $("#restauReview").append(val);
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -75,29 +169,7 @@ db.collection("restaurants")
   });
 
 
-//Review Form
-const reviewForm = document.querySelector("#submitReview");
-const review = document.querySelector("#review");
-`import firebase from "firebase/firebase";`;
 
-reviewForm.addEventListener("click", function (e) {
-  const msg = review.value;
-  console.log(msg);
-  if (msg == "") {
-    alert("Enter a review");
-    return;
-  }
-  db.collection("restaurants")
-    .doc(id)
-    .update({
-      reviews: firebase.firestore.FieldValue.arrayUnion({
-        user: userID,
-        note: msg,
-      }),
-    });
-  review.value = "";
-  e.preventDefault();
-});
 
 //$("#submitReview").click(() => location.reload())
 
@@ -115,15 +187,16 @@ function haversine_distance(Marker1, Marker2) {
     Math.asin(
       Math.sqrt(
         Math.sin(difflat / 2) * Math.sin(difflat / 2) +
-          Math.cos(rlat1) *
-            Math.cos(rlat2) *
-            Math.sin(difflon / 2) *
-            Math.sin(difflon / 2)
+        Math.cos(rlat1) *
+        Math.cos(rlat2) *
+        Math.sin(difflon / 2) *
+        Math.sin(difflon / 2)
       )
     );
   return d;
 }
 
+// Initialize MAP
 function initMap() {
   var restaurants = [{}];
 

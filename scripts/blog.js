@@ -31,7 +31,7 @@ const setupUI = (user) => {
             <div class="pink-text">Role : ${user.admin ? 'ADMIN' : 'USER'}</div>
             `;
             accountDetails.innerHTML = html;
-            userEmail = user.email ; 
+            userEmail = user.email;
         });
 
         //Toggle Logged In UI
@@ -83,8 +83,8 @@ const setupPosts = (data) => {
             <div class="blog-author">${post.author}</div>
             <hr>
         </div>
-
         `;
+
 
             html += li
         });

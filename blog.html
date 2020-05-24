@@ -50,7 +50,7 @@
               href="#"
               class="grey-text modal-trigger"
               data-target="modal-create"
-              >Add Blog</a
+              >Add Article</a
             >
           </li>
           <li class="logged-out" style="display: none;">
@@ -173,7 +173,7 @@
     <!-- CREATE GUIDE MODAL -->
     <div id="modal-create" class="modal">
       <div class="modal-content">
-        <h4>Add Restaurant</h4>
+        <h4>Add Article</h4>
         <br />
         <form id="create-form">
           <div class="input-field">
@@ -211,7 +211,7 @@
             ></textarea>
           </div>
           <div class="input-field">
-            <input type="date" id="postDate" class="form-control" />
+            <input type="date" id="createdAt" class="form-control" />
           </div>
           <div class="input-field">
             <input
@@ -264,37 +264,6 @@
       const db = firebase.firestore();
       const functions = firebase.functions();
 
-      document
-        .querySelector("#submitBtn")
-        .addEventListener("click", function () {
-          let postAuthor = document.querySelector("#author").value;
-          let postTitle = document.querySelector("#postTitle").value;
-          let postPreview = document.querySelector("#postPreview").value;
-          let postContent = document.querySelector("#postContent").value;
-          let postDate = document.querySelector("#postDate").value;
-          let youtube = document.querySelector("#youtube").value;
-
-          if (
-            postAuthor === "" ||
-            postTitle === "" ||
-            postPreview === "" ||
-            postContent === "" ||
-            postDate === "" ||
-            youtube === ""
-          ) {
-            alert("Fields Empty");
-          } else {
-            db.collection("posts").doc().set({
-              author: postAuthor,
-              createdAt: postDate,
-              postName: postTitle,
-              postPreview: postPreview,
-              postContent: postContent,
-              youtube: youtube,
-            });
-            alert("YEAH");
-          }
-        });
     </script>
 
     <!-- Compiled and minified JavaScript -->
