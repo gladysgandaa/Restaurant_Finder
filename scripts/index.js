@@ -6,6 +6,8 @@ const whatsonLinks = document.querySelectorAll(".whats-on");
 const accountDetails = document.querySelector(".account-details");
 const adminItems = document.querySelectorAll(".admin");
 const filterSection = document.querySelector(".filter-section");
+
+
 /* created an arraylist here so that it is global and i can 
 pass the database info into this list and use it anyway on this page */
 let resList = [
