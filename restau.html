@@ -23,8 +23,24 @@
             <img onclick="window.location.href ='/index.html'" src="img/logo.png"
                style="width: 180px; margin-top: 10px;" />
          </a>
+         <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="logged-in">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-account">Delete</a>
+            </li>
+         </ul>
       </div>
    </nav>
+
+   
+   <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+        <h4>Delete Restaurant</h4>
+        <br />
+        <div class="account-details"></div>
+        <button class="btn red darken-2 z-depth-0 admin" id="delete"> Delete Restaurant </button>
+      </div>
+    </div>
+
    <div class="restaurant-details container">
       <div class="row">
          <br>
@@ -58,13 +74,13 @@
             style="width: 50%; height: 20%; background-color: aliceblue;"></textarea>
       </div>
       <br>
-      <div class="review-submit"><input type="button" value="Add Review" id="submitReview" 
+      <div class="review-submit"><input type="button" value="Add Review" id="submitReview"
             style="display: block;margin: auto;" />
       </div><br><br>
       <ul>
          <li>
             <div id="restauReview" style="margin-bottom: 50px;"></div>
-            
+
          </li>
       </ul>
    </div>

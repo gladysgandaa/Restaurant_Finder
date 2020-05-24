@@ -48,9 +48,13 @@ const setupUI = (user) => {
         const email_verified = user.emailVerified;
         if (email_verified) {
             document.getElementById("verified").style.display = "none";
-        } else {
+            document.getElementById("verify").style.display = "block";
+            document.getElementById("verify2").style.display = "none";
+          } else {
             document.getElementById("verified").style.display = "block";
-        }
+            document.getElementById("verify").style.display = "none";
+            document.getElementById("verify2").style.display = "block";
+          }
     } else {
         adminItems.forEach(item => item.style.display = 'none');
         //Hide account info

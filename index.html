@@ -1,372 +1,402 @@
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <!-- Compiled and minified CSS -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      <link rel="stylesheet" href="styles/main.css" type="text/css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-      <title>Munchies</title>
-   </head>
-   <body class="grey ligthen=3">
-      <!-- NAVBAR -->
-      <nav class="z-depth-0 grey lighten-4">
-         <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">
-            <img src="img/logo.png" style="width: 180px; margin-top: 10px;">
-            </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-               <li class="logged-in" style="display: none;">
-                  <a href="blog.html" class="grey-text" >What's on</a>
-               </li>
-               <li class="logged-in" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
-               </li>
-               <li class="logged-in" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-contact">Contact</a>
-               </li>
-               <li class="admin" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
-               </li>
-                              <li class="logged-in" style="display: none;">
-                  <a href="#" class="grey-text" id="logout">Logout</a>
-               </li>
-               <li class="logged-out" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
-               </li>
-               <li class="logged-out" style="display: none;">
-                  <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
-               </li>
 
-            </ul>
-         </div>
-      </nav>
-      <!-- CONTACT MODAL -->
-      <div id="modal-contact" class="modal">
-         <div class="modal-content">
-            <h4>Contact</h4>
-            <br />
-            <form id="contact-form">
-               <div class="input-field">
-                  <input type="text" id="contact-name" required />
-                  <label for="contact-name">Name</label>
-               </div>
-               <div class="input-field">
-                  <input type="email" id="contact-email" required />
-                  <label for="contact-email">Email address</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="contact-number" required />
-                  <label for="contact-number">Contact number</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="contact-context" required />
-                  <label for="contact-context">Context</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="contact-ABN" required />
-                  <label for="contact-ABN">ABN Number (if applicable)</label>
-               </div>
-               <button class="btn yellow darken-2 z-depth-0">SUBMIT</button>
-            </form>
-         </div>
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <link rel="stylesheet" href="styles/main.css" type="text/css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <title>Munchies</title>
+</head>
+
+<body class="grey ligthen=3">
+   <!-- NAVBAR -->
+   <nav class="z-depth-0 grey lighten-4">
+      <div class="nav-wrapper container">
+         <a href="#" class="brand-logo">
+            <img src="img/logo.png" style="width: 180px; margin-top: 10px;">
+         </a>
+         <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="logged-in" style="display: none;">
+               <a href="blog.html" class="grey-text">What's on</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-contact" >Contact</a>
+            </li>
+            <li class="admin" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-create">Add Restaurants</a>
+            </li>
+            <li class="logged-in" style="display: none;">
+               <a href="#" class="grey-text" id="logout">Logout</a>
+            </li>
+            <li class="logged-out" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+            </li>
+            <li class="logged-out" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+            </li>
+            <li class="logged-out" style="display: none;">
+               <a href="#" class="grey-text modal-trigger" data-target="modal-forgot">Forgot Password?</a>
+            </li>
+
+         </ul>
       </div>
-      <!-- ADMIN ACTIONS -->
-      <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
-         <input type="email" placeholder="User email" id="admin-email" required />
-         <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
-      </form>
-      <!-- SIGN UP MODAL -->
-      <div id="modal-signup" class="modal">
-         <div class="modal-content">
-            <h4>Sign up</h4>
-            <br />
-            <form id="signup-form">
-               <div class="input-field">
-                  <input type="email" id="signup-email" required />
-                  <label for="signup-email">Email address</label>
-               </div>
-               <div class="input-field">
-                  <input type="password" id="signup-password" required />
-                  <label for="signup-password">Choose password</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="signup-bio" required />
-                  <label for="signup-bio">One line bio</label>
-               </div>
-               <button class="btn yellow darken-2 z-depth-0">Sign Up</button>
-            </form>
-         </div>
+   </nav>
+   <!-- CONTACT MODAL -->
+   <div id="modal-contact" class="modal">
+      <div class="modal-content">
+         <h4>Contact</h4>
+         <br />
+         <form id="contact-form">
+            <div class="input-field">
+               <input type="text" id="contact-name" required />
+               <label for="contact-name">Name</label>
+            </div>
+            <div class="input-field">
+               <input type="email" id="contact-email" required />
+               <label for="contact-email">Email address</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="contact-number" required />
+               <label for="contact-number">Contact number</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="contact-context" required />
+               <label for="contact-context">Context</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="contact-ABN" required />
+               <label for="contact-ABN">ABN Number (if applicable)</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0" id="verify">SUBMIT</button>
+            <p id="verify2">You need to verified your account first, to submit request</p>
+         </form>
       </div>
-      <!-- LOGIN MODAL -->
-      <div id="modal-login" class="modal">
-         <div class="modal-content">
-            <h4>Login</h4>
-            <br />
-            <form id="login-form">
-               <div class="input-field">
-                  <input type="email" id="login-email" required />
-                  <label for="login-email">Email address</label>
-               </div>
-               <div class="input-field">
-                  <input type="password" id="login-password" required />
-                  <label for="login-password">Your password</label>
-               </div>
-               <button class="btn yellow darken-2 z-depth-0">Login</button>
-            </form>
-         </div>
+   </div>
+   <!-- ADMIN ACTIONS -->
+   <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
+      <input type="email" placeholder="User email" id="admin-email" required />
+      <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
+   </form>
+   <!-- SIGN UP MODAL -->
+   <div id="modal-signup" class="modal">
+      <div class="modal-content">
+         <h4>Sign up</h4>
+         <br />
+         <form id="signup-form">
+            <div class="input-field">
+               <input type="email" id="signup-email" required />
+               <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+               <input type="password" id="signup-password" required />
+               <label for="signup-password">Choose password</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="signup-bio" required />
+               <label for="signup-bio">One line bio</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign Up</button>
+         </form>
       </div>
-      <!-- ACCOUNT MODAL -->
-      <div id="modal-account" class="modal">
-         <div class="modal-content center-align">
-            <h4>Account details</h4>
-            <br />
-            <div class="account-details"></div>
-            <button class="btn yellow darken-2 z-depth-0 center-align" id="verified" onclick="sendVerification()">Send
+   </div>
+   <!-- LOGIN MODAL -->
+   <div id="modal-login" class="modal">
+      <div class="modal-content">
+         <h4>Login</h4>
+         <br />
+         <form id="login-form">
+            <div class="input-field">
+               <input type="email" id="login-email" required />
+               <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+               <input type="password" id="login-password" />
+               <label for="login-password">Your password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Login</button>
+         </form>
+      </div>
+   </div>
+
+   <!-- FORGOT MODAL -->
+   <div id="modal-forgot" class="modal">
+      <div class="modal-content">
+         <h4>Password Reset</h4>
+         <br />
+         <form id="forgot-form">
+            <div class="input-field">
+               <input type="email" id="forgot-email" required />
+               <label for="forgot-email">Email address</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">RESET</button>
+         </form>
+      </div>
+   </div>
+
+   <!-- ACCOUNT MODAL -->
+   <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+         <h4>Account details</h4>
+         <br />
+         <div class="account-details"></div>
+         <button class="btn yellow darken-2 z-depth-0 center-align" id="verified" onclick="sendVerification()">Send
             verification</button>
-         </div>
       </div>
-      <!-- CREATE GUIDE MODAL -->
-      <div id="modal-create" class="modal">
-         <div class="modal-content">
-            <h4>Add Restaurant</h4>
-            <br />
-            <form id="create-form">
-               <div class="input-field">
-                  <input type="text" id="name" required>
-                  <label for="name">Restaurant Name</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="city" required>
-                  <label for="city">Restaurant City</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="category" required>
-                  <label for="category">Restaurant Category</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="description" required>
-                  <label for="category">Restaurant Description</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="address" required>
-                  <label for="category">Restaurant Address</label>
-               </div>
-               <div class="input-field">
-                  <input type="text" id="price" required>
-                  <label for="price">Restaurant Price (1-5)</label>
-               </div>
-               <!-- <div class="upload-image">
+   </div>
+   <!-- CREATE GUIDE MODAL -->
+   <div id="modal-create" class="modal">
+      <div class="modal-content">
+         <h4>Add Restaurant</h4>
+         <br />
+         <form id="create-form">
+            <div class="input-field">
+               <input type="text" id="name" required>
+               <label for="name">Restaurant Name</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="city" required>
+               <label for="city">Restaurant City</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="category" required>
+               <label for="category">Restaurant Category</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="description" required>
+               <label for="category">Restaurant Description</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="address" required>
+               <label for="category">Restaurant Address</label>
+            </div>
+            <div class="input-field">
+               <input type="text" id="price" required>
+               <label for="price">Restaurant Price (1-5)</label>
+            </div>
+            <!-- <div class="upload-image">
                   <label>Select image: </label>
                   <input type="file" id="image" accept="image/*">
                   <button type="button" onclick="upload()">Upload Image</button>
                   </div> -->
-               <div class="file-field input-field">
-                  <div class="btn">
-                     <span>File</span>
-                     <input type="file" onchange="previewFile()">
-                  </div>
-                  <div class="file-path-wrapper">
-                     <input class="file-path validate" type="text">
-                  </div>
+            <div class="file-field input-field">
+               <div class="btn">
+                  <span>File</span>
+                  <input type="file" onchange="previewFile()">
                </div>
-               <p id="url"><b>Firebase Storage URL: </b></p>
-               <div class="col s12">
-                  <img class="responsive-img" src="https://firebasestorage.googleapis.com/v0/b/img-storage-d41a0.appspot.com/o/images%2Ffirebase-storage.jpg?alt=media&token=394aeb7e-c10b-4b02-b7b2-144795ebf4a8"
-                     id="preview" alt="Preview Image">
+               <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
                </div>
-               <input type="hidden" name="image" id="image" value="url">
-               <button class="btn yellow darken-2 z-depth-0">Create</button>
-            </form>
-         </div>
+            </div>
+            <p id="url"><b>Firebase Storage URL: </b></p>
+            <div class="col s12">
+               <img class="responsive-img"
+                  src="https://firebasestorage.googleapis.com/v0/b/img-storage-d41a0.appspot.com/o/images%2Ffirebase-storage.jpg?alt=media&token=394aeb7e-c10b-4b02-b7b2-144795ebf4a8"
+                  id="preview" alt="Preview Image">
+            </div>
+            <input type="hidden" name="image" id="image" value="url">
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+         </form>
       </div>
+   </div>
 
-      <div class="container" style="margin-top: 40px;">
-         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3 filter-section">
-               <dl>
-                  <dt>Category</dt>
-                  <dd><a class="filter">All</a></dd>
-                  <dd><a class="filter">Japanese</a></dd>
-                  <dd><a class="filter">Fusion</a></dd>
-                  <dd><a class="filter">Fast Food</a></dd>
-                  <dd><a class="filter">Brunch</a></dd>
-                  <dt>Price</dt>
-                  <dd><a class="filter">$</a></dd>
-                  <dd><a class="filter">$$</a></dd>
-                  <dd><a class="filter">$$$</a></dd>
-                  <dd><a class="filter">$$$$</a></dd>
-                  <dd><a class="filter">$$$$$</a></dd>
-                  <dt>City</dt>
-                  <dd><a class="filter">Melbourne</a></dd>
-                  <dd><a class="filter">Windsor</a></dd>
-                  <dd><a class="filter">Brunswick</a></dd>
-                  <dd><a class="filter">Richmond</a></dd>
-                  <dd><a class="filter">St Kilda</a></dd>
-                  <dd><a class="filter">Fitzroy</a></dd>
-                </dl>
-            </div>
-            <div class="col-sm-9 col-md-9 col-lg-9 list-restaurant">
-               <div class="row z-depth-0 restaurants" style="border: none;">
-            </div>
+   <div class="container" style="margin-top: 40px;">
+      <div class="row">
+         <div class="col-sm-3 col-md-3 col-lg-3 filter-section">
+            <dl>
+               <ul>
+                  <li class="logged-in" style="display: none;">
+                     <dt>Category</dt>
+                     <dd><a class="filter">All</a></dd>
+                     <dd><a class="filter">Japanese</a></dd>
+                     <dd><a class="filter">Fusion</a></dd>
+                     <dd><a class="filter">Fast Food</a></dd>
+                     <dd><a class="filter">Brunch</a></dd>
+                  </li>
+                  <li class="logged-in" style="display: none;">
+                     <dt>Price</dt>
+                     <dd><a class="filter">$</a></dd>
+                     <dd><a class="filter">$$</a></dd>
+                     <dd><a class="filter">$$$</a></dd>
+                     <dd><a class="filter">$$$$</a></dd>
+                     <dd><a class="filter">$$$$$</a></dd>
+                  </li>
+                  <li class="logged-in" style="display: none;">
+                     <dd><a class="filter">Melbourne</a></dd>
+                     <dd><a class="filter">Windsor</a></dd>
+                     <dd><a class="filter">Brunswick</a></dd>
+                     <dd><a class="filter">Richmond</a></dd>
+                     <dd><a class="filter">St Kilda</a></dd>
+                     <dd><a class="filter">Fitzroy</a></dd>
+                  </li>
+               </ul>
+            </dl>
          </div>
+         <div class="col-sm-9 col-md-9 col-lg-9 list-restaurant">
+            <div class="row z-depth-0 restaurants" style="border: none;">
+            </div>
          </div>
       </div>
-      <!-- All connection with Firebase is initiliazed here-->
-      <!-- The core Firebase JS SDK is always required and must be listed first -->
-      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-messaging.js"></script>
-      <script src="https://apis.google.com/js/api.js"></script>
-      <!-- TODO: Add SDKs for Firebase products that you want to use
+   </div>
+   <!-- All connection with Firebase is initiliazed here-->
+   <!-- The core Firebase JS SDK is always required and must be listed first -->
+   <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-storage.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-functions.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-messaging.js"></script>
+   <script src="https://apis.google.com/js/api.js"></script>
+   <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-      <script>
-         // Your web app's Firebase configuration
-         var firebaseConfig = {
-            apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
-            authDomain: "form-50005.firebaseapp.com",
-            databaseURL: "https://form-50005.firebaseio.com",
-            projectId: "form-50005",
-            storageBucket: "form-50005.appspot.com",
-            messagingSenderId: "790644686206",
-            appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
-            measurementId: "G-CR41MFE7Q1"
-         }
-         // Initialize Firebase
-         firebase.initializeApp(firebaseConfig);
-         firebase.analytics();
-         //Make auth and firestore reference
-         const auth = firebase.auth();
-         const db = firebase.firestore();
-         const functions = firebase.functions();
-         const messaging = firebase.messaging();
-         
-         messaging.usePublicVapidKey("BMAlSdK-sCOMUhv0hibLmEGE1CrXfqQSWPiZiSoGn2zjkUdqBgK3gq3ZQ_6PczMPMHSRGeUGc9YBWXkPkaLafmg");
-         const tokenDivId = 'token_div';
-         const permissionDivId = 'permission_div';
-         
-         // [START refresh_token]
-         // Callback fired if Instance ID token is updated.
-         messaging.onTokenRefresh(function() {
-         messaging.getToken().then(function(refreshedToken) {
-         console.log('Token refreshed.');
-         // Indicate that the new Instance ID token has not yet been sent to the
-         // app server.
-         setTokenSentToServer(false);
-         sendTokenToServer(refreshedToken);
-         resetUI();
-         // [END_EXCLUDE]
-         }).catch(function(err) {
-         console.log('Unable to retrieve refreshed token ', err);
-         });
-         });
+   <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+         apiKey: "AIzaSyBMRTfK_7w3PZ3LfZCdWaqoEaA_CqZM5r4",
+         authDomain: "form-50005.firebaseapp.com",
+         databaseURL: "https://form-50005.firebaseio.com",
+         projectId: "form-50005",
+         storageBucket: "form-50005.appspot.com",
+         messagingSenderId: "790644686206",
+         appId: "1:790644686206:web:f0e8c087bd3ab7e95dc72f",
+         measurementId: "G-CR41MFE7Q1"
+      }
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      //Make auth and firestore reference
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      const functions = firebase.functions();
+      const messaging = firebase.messaging();
 
-         messaging.onMessage(function(payload) {
+      messaging.usePublicVapidKey("BMAlSdK-sCOMUhv0hibLmEGE1CrXfqQSWPiZiSoGn2zjkUdqBgK3gq3ZQ_6PczMPMHSRGeUGc9YBWXkPkaLafmg");
+      const tokenDivId = 'token_div';
+      const permissionDivId = 'permission_div';
+
+      // [START refresh_token]
+      // Callback fired if Instance ID token is updated.
+      messaging.onTokenRefresh(function () {
+         messaging.getToken().then(function (refreshedToken) {
+            console.log('Token refreshed.');
+            // Indicate that the new Instance ID token has not yet been sent to the
+            // app server.
+            setTokenSentToServer(false);
+            sendTokenToServer(refreshedToken);
+            resetUI();
+            // [END_EXCLUDE]
+         }).catch(function (err) {
+            console.log('Unable to retrieve refreshed token ', err);
+         });
+      });
+
+      messaging.onMessage(function (payload) {
          console.log('Message received. ', payload);
          var obj = JSON.parse(payload.data.notification);
          var notification = new Notification(obj.title, {
-         icon: obj.icon,
-         body: obj.body
+            icon: obj.icon,
+            body: obj.body
          });
-         
+
          return self.registration.showNotification(notificationTitle, notificationOptions);
          appendMessage(payload);
          // [END_EXCLUDE]
-         });
-         // [END receive_message]
-         
-         function resetUI() {
-         messaging.getToken().then(function(currentToken) {
-         if (currentToken) {
-         sendTokenToServer(currentToken);
-         updateUIForPushEnabled(currentToken);
-         } else {
-         // Show permission request.
-         console.log('No Instance ID token available. Request permission to generate one.');
-         // Show permission UI.
-         updateUIForPushPermissionRequired();
-         setTokenSentToServer(false);
-         }
-         }).catch(function(err) {
-         console.log('An error occurred while retrieving token. ', err);
-         // showToken('Error retrieving Instance ID token. ', err);
-         setTokenSentToServer(false);
+      });
+      // [END receive_message]
+
+      function resetUI() {
+         messaging.getToken().then(function (currentToken) {
+            if (currentToken) {
+               sendTokenToServer(currentToken);
+               updateUIForPushEnabled(currentToken);
+            } else {
+               // Show permission request.
+               console.log('No Instance ID token available. Request permission to generate one.');
+               // Show permission UI.
+               updateUIForPushPermissionRequired();
+               setTokenSentToServer(false);
+            }
+         }).catch(function (err) {
+            console.log('An error occurred while retrieving token. ', err);
+            // showToken('Error retrieving Instance ID token. ', err);
+            setTokenSentToServer(false);
          });
          // [END get_token]
-         }
-         
-         
-         function sendTokenToServer(currentToken) {
+      }
+
+
+      function sendTokenToServer(currentToken) {
          if (!isTokenSentToServer()) {
-         console.log('Sending token to server...');
-         // TODO(developer): Send the current token to your server.
-         setTokenSentToServer(true);
+            console.log('Sending token to server...');
+            // TODO(developer): Send the current token to your server.
+            setTokenSentToServer(true);
          } else {
-         console.log('Token already sent to server so won\'t send it again ' +
-          'unless it changes');
+            console.log('Token already sent to server so won\'t send it again ' +
+               'unless it changes');
          }
-         
-         }
-         
-         function isTokenSentToServer() {
+
+      }
+
+      function isTokenSentToServer() {
          return window.localStorage.getItem('sentToServer') === '1';
-         }
-         
-         function setTokenSentToServer(sent) {
+      }
+
+      function setTokenSentToServer(sent) {
          window.localStorage.setItem('sentToServer', sent ? '1' : '0');
-         }
-         
-         function showHideDiv(divId, show) {
+      }
+
+      function showHideDiv(divId, show) {
          const div = document.querySelector('#' + divId);
          if (show) {
-         div.style = 'display: visible';
+            div.style = 'display: visible';
          } else {
-         div.style = 'display: none';
+            div.style = 'display: none';
          }
-         }
-         
-         function requestPermission() {
+      }
+
+      function requestPermission() {
          console.log('Requesting permission...');
          // [START request_permission]
-         messaging.requestPermission().then(function() {
-         console.log('Notification permission granted.');
-         resetUI();
-         // [END_EXCLUDE]
-         }).catch(function(err) {
-         console.log('Unable to get permission to notify.', err);
+         messaging.requestPermission().then(function () {
+            console.log('Notification permission granted.');
+            resetUI();
+            // [END_EXCLUDE]
+         }).catch(function (err) {
+            console.log('Unable to get permission to notify.', err);
          });
          // [END request_permission]
-         }
-         
-         function deleteToken() {
-         messaging.getToken().then(function(currentToken) {
-         messaging.deleteToken(currentToken).then(function() {
-         console.log('Token deleted.');
-         setTokenSentToServer(false);
-         // [START_EXCLUDE]
-         // Once token is deleted update UI.
-         resetUI();
-         // [END_EXCLUDE]
-         }).catch(function(err) {
-         console.log('Unable to delete token. ', err);
+      }
+
+      function deleteToken() {
+         messaging.getToken().then(function (currentToken) {
+            messaging.deleteToken(currentToken).then(function () {
+               console.log('Token deleted.');
+               setTokenSentToServer(false);
+               // [START_EXCLUDE]
+               // Once token is deleted update UI.
+               resetUI();
+               // [END_EXCLUDE]
+            }).catch(function (err) {
+               console.log('Unable to delete token. ', err);
+            });
+            // [END delete_token]
+         }).catch(function (err) {
+            console.log('Error retrieving Instance ID token. ', err);
+            // showToken('Error retrieving Instance ID token. ', err);
          });
-         // [END delete_token]
-         }).catch(function(err) {
-         console.log('Error retrieving Instance ID token. ', err);
-         // showToken('Error retrieving Instance ID token. ', err);
-         });
-         
-         }
-         
-         // Add a message to the messages element.
-         function appendMessage(payload) {
+
+      }
+
+      // Add a message to the messages element.
+      function appendMessage(payload) {
          const messagesElement = document.querySelector('#messages');
          const dataHeaderELement = document.createElement('h5');
          const dataElement = document.createElement('pre');
@@ -375,39 +405,38 @@
          dataElement.textContent = JSON.stringify(payload, null, 2);
          messagesElement.appendChild(dataHeaderELement);
          messagesElement.appendChild(dataElement);
-         }
-         
-         
-         function updateUIForPushEnabled(currentToken) {
+      }
+
+
+      function updateUIForPushEnabled(currentToken) {
          showHideDiv(tokenDivId, true);
          showHideDiv(permissionDivId, false);
          // showToken(currentToken);
-         }
-         
-         function updateUIForPushPermissionRequired() {
+      }
+
+      function updateUIForPushPermissionRequired() {
          showHideDiv(tokenDivId, false);
          showHideDiv(permissionDivId, true);
-         }
-         
-         resetUI();
-      </script>
-      <!-- Compiled and minified JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="scripts/auth.js"></script>
-      <script src="scripts/index.js"></script>
-      <script src="scripts/cloud-message.js"></script>
-      <script src="scripts/storage.js"></script>
-   </body>
-   <link href="sticky-footer.css" rel="stylesheet">
+      }
 
-<footer class="footer mt-auto py-3 logged-in">
-<div class="container">
-   <script async src="https://cse.google.com/cse.js?cx=017464211499015665322:v6tb5mdrrdq"></script>
-   <div class="searchbar-text">Can't find what you are looking for?</div>
-   <div class="gcse-search" enableAutoComplete="true"></div>
-   <div class="copyright">&copy; Copyright 2020 S3679389(Gladys Ganda) - s3692192(Aldo Irvine)</div>
+      resetUI();
+   </script>
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <script src="scripts/auth.js"></script>
+   <script src="scripts/index.js"></script>
+   <script src="scripts/cloud-message.js"></script>
+   <script src="scripts/storage.js"></script>
+</body>
+<link href="sticky-footer.css" rel="stylesheet">
 
-</div>
+<footer class="footer mt-auto py-3">
+   <div class="container">
+      <script async src="https://cse.google.com/cse.js?cx=017464211499015665322:v6tb5mdrrdq"></script>
+      <div class="searchbar-text">Can't find what you are looking for?</div>
+      <div class="gcse-search" enableAutoComplete="true"></div>
+      <div class="copyright">&copy; Copyright 2020 S3679389(Gladys Ganda) - s3692192(Aldo Irvine)</div>
+
 </footer>
-</html>
 
+</html>

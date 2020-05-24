@@ -20,11 +20,8 @@ const id = sessionStorage.getItem("id");
 const userID = sessionStorage.getItem("userID");
 console.log(id);
 
-//   db.collection("restaurants").doc(id)
-// .onSnapshot(function(doc) {
-//     console.log("Current data: ", doc.data());
-//     console.log("new message: ", doc.data().reviews )
-// });
+
+
 
 
 //Review Form
@@ -80,55 +77,18 @@ db.collection("restaurants")
       let reviewList = document.querySelector("#restauReview");
 
       var unique = Array.from(new Set(restau.reviews));
-      //console.log(unique)
-      // restau.reviews.map(rev =>{
-      //     $('#restauReview p').remove()
-      //     $('#restauReview').append("<p>" +rev.note+"</p><p><b>Reviewed By: </b>"+rev.user+"</p>")
-
-      // })
+     
       let val;
       var results = [];
       var users = [];
 
-      // const reviewForm = document.querySelector("#submitReview");
-      // const review = document.querySelector("#review");
-      // `import firebase from "firebase/firebase";`;
-
-      // reviewForm.addEventListener("click", function (e) {
-      //   const msg = review.value;
-      //   console.log(msg);
-      //   if (msg == "") {
-      //     return;
-      //   }
-      //   db.collection("restaurants")
-      //     .doc(id)
-      //     .update({
-      //       reviews: firebase.firestore.FieldValue.arrayUnion({
-      //         user: userID,
-      //         note: msg,
-      //       }),
-      //     });
-      //   review.value = "";
-
-      //   function clearBox(elementID) {
-      //     document.getElementById(elementID).innerHTML = "";
-      //   }
-      //   clearBox("restauReview")
-      // });
 
       restau.reviews.forEach(function (rev) {
         console.log(rev.note);
         console.log(rev.user);
         results.push(rev.note);
         users.push(rev.user);
-        // console.log(results);
-
-        // val =
-        //   "<p>" +
-        //   rev.note +
-        //   "</p><p><b>Reviewed By: </b>" +
-        //   rev.user +
-        //   "</p><hr>";
+ 
       });
 
       console.log(results);
@@ -139,78 +99,14 @@ db.collection("restaurants")
         restauReview.innerHTML += "<p>" + results[i] + "</p><p>Reviewed by: " + users[i] + "</p><br>";
       }
 
-      // for (var i = 0; i < arr.length; i++)
-      // restauReview.innerHTML += "<p>" + arr[i] + "</p><br>";
-
-      // var arrayLength = results.length;
-      // for (var i = 0; i < arrayLength; i++) {
-      //   console.log(results[i]);
-      //   console.log(users[i]);
-      //   console.log("hi")
-      //   console.log("=========================================")
-      //   // val =
-      //   //   "<p>" +
-      //   //   results[i] +
-      //   //   "</p><p><b>Reviewed By: </b>" +
-      //   //   users[i] +
-      //   //   "</p><hr>";
-      //   holder.innerHTML += "<p>" + results[i] + "</p><br><p> Reviewed By :" + users[i] + "</p></hr>";
-      //   //Do something
-      // }
-
-
-
-
-      // $("#restauReview").append(val);
+     
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   });
 
-// db.collection("restaurants").doc(id)
-// .get()
-// .then(doc =>{
-//   if (doc.exists) {
-//   restau = doc.data()
-//   console.log("Document data:", restau.name);
 
-// let name = document.querySelector("#name");
-// name.innerHTML = restau.name;
-// let city = document.querySelector("#city");
-// city.innerHTML = restau.city;
-// let address = document.querySelector("#address");
-// address.innerHTML = restau.address;
-// let cat = document.querySelector("#category");
-// cat.innerHTML = restau.category;
-// let price = document.querySelector("#price");
-// price.innerHTML = restau.price;
-// let description = document.querySelector("#description");
-// description.innerHTML = restau.description;
-// let image = document.querySelector("#image");
-// image.innerHTML = '<img src="' + restau.image + '" />';
-// let reviewList = document.querySelector("#restauReview");
-
-//   console.log(restau.name)
-//  restau.reviews.forEach(function(rev) {
-//      if(rev){
-//         console.log(rev.note)
-//         $('#restauReview').append("<p>" +rev.note+"</p><p><b>Reviewed By: </b>"+rev.user+"</p>")
-
-//      }
-
-//  })
-
-// } else {
-//     // doc.data() will be undefined in this case
-//     console.log("No such document!");
-// }
-
-//   })
-
-
-
-//$("#submitReview").click(() => location.reload())
 
 function haversine_distance(Marker1, Marker2) {
   var R = 6371.071; // Radius of the Earth in miles

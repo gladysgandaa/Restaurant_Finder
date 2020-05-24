@@ -19,6 +19,8 @@ let resList = [
 
 let userID = "";
 
+
+
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
@@ -44,12 +46,16 @@ const setupUI = (user) => {
     loggedInLinks.forEach((item) => (item.style.display = "block"));
     loggedOutLinks.forEach((item) => (item.style.display = "none"));
     whatsonLinks.forEach((item) => (item.style.display = "block"));
-    const email_verified = user.emailVerified;
 
+    const email_verified = user.emailVerified;
     if (email_verified) {
       document.getElementById("verified").style.display = "none";
+      document.getElementById("verify").style.display = "block";
+      document.getElementById("verify2").style.display = "none";
     } else {
       document.getElementById("verified").style.display = "block";
+      document.getElementById("verify").style.display = "none";
+      document.getElementById("verify2").style.display = "block";
     }
   } else {
     adminItems.forEach((item) => (item.style.display = "none"));
